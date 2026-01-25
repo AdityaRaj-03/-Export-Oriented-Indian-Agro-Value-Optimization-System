@@ -2,6 +2,9 @@ import { useState } from "react";
 import CropForm from "../components/CropForm";
 import Result from "../components/Result";
 import Footer from "../components/Footer";
+import Testimonials from "../components/Testimonials";
+import Stats from "../components/Stats";
+import FAQ from "../components/FAQ";
 import "../style/Home.css";
 
 function HomePage() {
@@ -73,7 +76,13 @@ function HomePage() {
         </aside>
       </div>
 
+      <Stats />
+
       <Result result={result} />
+
+      <Testimonials />
+
+      <FAQ />
 
       <Footer />
     </div>
