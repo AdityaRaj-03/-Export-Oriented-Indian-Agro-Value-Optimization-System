@@ -1,9 +1,9 @@
+// ...existing code...
 import { useState } from "react";
 import CropForm from "../components/CropForm";
 import Result from "../components/Result";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testimonials";
-import Stats from "../components/Stats";
 import FAQ from "../components/FAQ";
 import "../style/Home.css";
 
@@ -76,7 +76,7 @@ function HomePage() {
         </aside>
       </div>
 
-      <Stats />
+      {/* Stats component removed */}
 
       <Result result={result} />
 
@@ -90,3 +90,4 @@ function HomePage() {
 }
 
 export default HomePage;
+// ...existing code...
