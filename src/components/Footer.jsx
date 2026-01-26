@@ -1,4 +1,6 @@
+// ...existing code...
 import "../style/Home.css";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -12,13 +14,13 @@ function Footer() {
         <div className="footer-links">
           <div>
             <h4>Product</h4>
-            <a href="#crop-form">Predict</a>
+            <a href="/recommend">Predict</a>
             <a href="/about">About</a>
           </div>
           <div>
             <h4>Company</h4>
-            <a href="#">Contact</a>
-            <a href="#">Privacy</a>
+            <Link to="/contact">Contact</Link>
+            <Link to="#">Privacy</Link>
           </div>
         </div>
       </div>
@@ -28,3 +30,4 @@ function Footer() {
 }
 
 export default Footer;
+// ...existing code...

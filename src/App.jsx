@@ -1,37 +1,29 @@
-import { useState } from "react";
+// ...existing code...
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
-
-import { predictCrop } from "./data/dummyLogic";
+import CropRecommendation from "./pages/CropRecommendation";
+import FAQPage from "./pages/FAQPage";
+import Contact from "./pages/Contact";
+import HowToUse from "./pages/HowToUse";
 
 function App() {
-  const [result, setResult] = useState(null);
-
-  function handlePredict(inputData) {
-    const prediction = predictCrop(inputData);
-    setResult(prediction);
-  }
-
   return (
     <BrowserRouter>
       <Navigation />
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage
-              onPredict={handlePredict}
-              result={result}
-            />
-          }
-        />
+        <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/howto" element={<HowToUse />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/recommend" element={<CropRecommendation />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+// ...existing code...
