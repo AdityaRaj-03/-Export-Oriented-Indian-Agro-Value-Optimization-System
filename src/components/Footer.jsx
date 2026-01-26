@@ -14,13 +14,12 @@ function Footer() {
         <div className="footer-links">
           <div>
             <h4>Product</h4>
-            <a href="/recommend">Predict</a>
-            <a href="/about">About</a>
+            <Link to="/recommend">Predict</Link>
+            <Link to="/about">About</Link>
           </div>
           <div>
             <h4>Company</h4>
             <Link to="/contact">Contact</Link>
-            <Link to="#">Privacy</Link>
           </div>
         </div>
       </div>
