@@ -5,6 +5,36 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  overflow: hidden;
+}
+
+/* Tractor Animation */
+.tractor-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tractor-anim {
+  position: absolute;
+  height: 40px;
+  width: auto;
+  animation: driveTractor 12s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+@keyframes driveTractor {
+  0% {
+    left: -60px;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 .nav-container {
@@ -15,6 +45,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-logo {
