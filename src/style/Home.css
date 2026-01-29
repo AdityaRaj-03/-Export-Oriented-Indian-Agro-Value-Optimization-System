@@ -248,7 +248,7 @@ form button:active {
 .faq-item p { margin:8px 0 0; color:var(--text-light); }
 
 /* About page tweaks */
-.about-page .about-grid { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; max-width: 1100px; margin: 0 auto; }
+.about-page .about-grid { display: block; max-width: 1100px; margin: 0 auto; }
 .about-photo { width: 200px; border-radius: 12px; border: 6px solid rgba(37,99,235,0.06); display:block; }
 .about-photo-wrap { display:flex; justify-content:center; }
 .timeline { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 12px; }
@@ -256,7 +256,7 @@ form button:active {
 .about-cta { margin-top: 18px; font-weight:600; color:var(--primary); }
 
 @media (max-width: 960px) {
-  .about-page .about-grid { grid-template-columns: 1fr; }
+  .about-page .about-grid { display: block; }
   .about-photo { width: 120px; margin: 0 0 8px; }
 }
 

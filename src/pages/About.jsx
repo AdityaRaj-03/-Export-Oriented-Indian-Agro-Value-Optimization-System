@@ -40,9 +40,9 @@ function About() {
   const tech = ["React", "Flask", "Python", "Scikit-learn", "XGBoost", "Pandas"];
 
   const team = [
-    { name: "Divyanshu Kashyap", role: "Developer" },
+    { name: "Divyanshu Kashyap", role: "Backend Developer" },
     { name: "Bavigadda Meghana", role: "Research" },
-    { name: "Aditya Raj", role: "Lead" },
+    { name: "Aditya Raj", role: "Frontend Developer" },
   ];
 
   const [active, setActive] = useState({});
@@ -54,10 +54,6 @@ function About() {
   return (
     <div className="page about-page">
       <div className="about-grid">
-        <div className="about-photo-wrap">
-          <img src={Avatar} alt="Aditya Raj" className="about-photo" />
-        </div>
-
         <div className="about-content">
           <h1>Export-Oriented Indian Agro — Project Overview</h1>
           <p className="lead">
