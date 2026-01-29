@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../style/Home.css";
-import Avatar from "../assets/aditya-avatar.svg";
 
-function Counter({ to, label }) {
+function Counter({ to, label, icon }) {
   const [value, setValue] = useState(0);
   useEffect(() => {
     let start = 0;
@@ -21,8 +21,9 @@ function Counter({ to, label }) {
   }, [to]);
 
   return (
-    <div className="stat">
-      <div className="stat-value">{value}{typeof to === 'string' ? '' : ''}</div>
+    <div className="stat-card-new">
+      <div className="stat-icon">{icon}</div>
+      <div className="stat-value">{value}+</div>
       <div className="stat-label">{label}</div>
     </div>
   );
@@ -30,108 +31,124 @@ function Counter({ to, label }) {
 
 function About() {
   const features = [
-    "Crop recommendation",
-    "Export potential",
-    "Risk indicators",
-    "Mobile-friendly",
-    "Fast predictions",
+    { icon: "🌾", title: "Crop Recommendation", desc: "AI-powered suggestions" },
+    { icon: "📊", title: "Export Potential", desc: "Market demand analysis" },
+    { icon: "⚠️", title: "Risk Indicators", desc: "Cultivation alerts" },
+    { icon: "📱", title: "Mobile Friendly", desc: "Use anywhere" },
+    { icon: "⚡", title: "Fast Predictions", desc: "Results in seconds" },
+    { icon: "🎯", title: "High Accuracy", desc: "92%+ precision" },
   ];
 
-  const tech = ["React", "Flask", "Python", "Scikit-learn", "XGBoost", "Pandas"];
+  const tech = [
+    { name: "React", icon: "⚛️", color: "#61DAFB" },
+    { name: "Flask", icon: "🌶️", color: "#000" },
+    { name: "Python", icon: "🐍", color: "#3776AB" },
+    { name: "Scikit-learn", icon: "🔬", color: "#F7931E" },
+    { name: "XGBoost", icon: "🚀", color: "#FF6600" },
+    { name: "Pandas", icon: "🐼", color: "#150458" },
+  ];
 
   const team = [
-    { name: "Divyanshu Kashyap", role: "Backend Developer" },
-    { name: "Bavigadda Meghana", role: "Research" },
-    { name: "Aditya Raj", role: "Frontend Developer" },
+    { name: "Divyanshu Kashyap", role: "Backend Developer", icon: "⚙️" },
+    { name: "Bavigadda Meghana", role: "Research & ML", icon: "🧠" },
+    { name: "Aditya Raj", role: "Frontend Developer", icon: "🎨" },
   ];
 
-  const [active, setActive] = useState({});
-
-  function toggleFeature(i) {
-    setActive((s) => ({ ...s, [i]: !s[i] }));
-  }
+  const [hoveredFeature, setHoveredFeature] = useState(null);
 
   return (
-    <div className="page about-page">
-      <div className="about-grid">
-        <div className="about-content">
-          <h1>Export-Oriented Indian Agro — Project Overview</h1>
-          <p className="lead">
-            Export-Oriented Indian Agro Value Optimization System is a web-based decision support tool designed to help Indian farmers select suitable crops for export.
-            The system uses agricultural, climatic, and regional data to recommend crops that have higher export potential and better profitability.
-          </p>
-
-          <section className="card">
-            <h2>Problem Statement</h2>
-            <p>
-              Indian farmers often face difficulty in selecting the right crops for cultivation when targeting export markets. Crop selection depends on multiple factors such as soil conditions, climate, season, and market demand.
-              Traditional advisory systems rarely consider export demand, leading to missed income opportunities.
-            </p>
-          </section>
-
-          <section className="card">
-            <h2>Solution Approach</h2>
-            <p>
-              The system analyzes user-provided inputs such as region, season, soil type, rainfall, and temperature. Using data analytics and machine learning techniques, it identifies patterns from historical agricultural and export data and recommends the most suitable crop for the given conditions.
-            </p>
-          </section>
-
-          <section className="card">
-            <h2>Key Features</h2>
-            <div className="feature-chips">
-              {features.map((f, i) => (
-                <button key={i} className={"chip " + (active[i] ? 'active' : '')} onClick={() => toggleFeature(i)}>
-                  {f}
-                </button>
-              ))}
-            </div>
-          </section>
-
-          <section className="card split">
-            <div>
-              <h2>Technologies Used</h2>
-              <div className="tech-list">
-                {tech.map((t, i) => (
-                  <span key={i} className="tech">{t}</span>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h2>Dataset & Methodology</h2>
-              <details className="faq-item"><summary>Overview</summary>
-                <p>
-                  The system uses historical agricultural data including soil properties, weather conditions, regional information, and crop records. Data preprocessing, feature selection, and machine learning models (Random Forest, XGBoost) are applied to predict crop suitability and export potential.
-                </p>
-              </details>
-            </div>
-          </section>
-
-          <section className="card">
-            <h2>Team & Guide</h2>
-            <div className="team-grid">
-              {team.map((m, i) => (
-                <div key={i} className="team-card">
-                  <div className="team-avatar">{m.name.split(' ').map(n => n[0]).slice(0,2).join('')}</div>
-                  <div>
-                    <strong>{m.name}</strong>
-                    <div className="muted">{m.role}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="muted" style={{ marginTop: 12 }}>Guided By: Mr. Karan Kumar Das — Lovely Professional University</p>
-          </section>
-
-          <section className="card stats-row">
-            <Counter to={1200} label="Farmers helped" />
-            <Counter to={45} label="Export-ready crops" />
-            <Counter to={18} label="Avg. yield increase (%)" />
-          </section>
-
-          <p className="about-cta">For collaboration or queries: <a href="mailto:support@agroexport.com">support@agroexport.com</a></p>
+    <div className="page about-page-new">
+      {/* Hero Section */}
+      <section className="about-hero">
+        <div className="about-hero-content">
+          <span className="badge">🌍 Export-Ready Solutions</span>
+          <h1>Empowering Indian<br /><span className="gradient-text">Farmers</span> Globally</h1>
+          <p>AI-driven crop recommendations for maximum export potential</p>
         </div>
-      </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="stats-section">
+        <Counter to={1200} label="Farmers Helped" icon="👨‍🌾" />
+        <Counter to={45} label="Export Crops" icon="🌾" />
+        <Counter to={92} label="Accuracy %" icon="🎯" />
+        <Counter to={18} label="Yield Increase %" icon="📈" />
+      </section>
+
+      {/* Problem & Solution */}
+      <section className="problem-solution">
+        <div className="ps-card problem">
+          <div className="ps-icon">❌</div>
+          <h3>The Problem</h3>
+          <p>Farmers struggle to select export-ready crops due to lack of market data</p>
+        </div>
+        <div className="ps-arrow">→</div>
+        <div className="ps-card solution">
+          <div className="ps-icon">✅</div>
+          <h3>Our Solution</h3>
+          <p>ML-powered system analyzes climate, soil & market demand for smart recommendations</p>
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section className="features-section-new">
+        <h2>What We Offer</h2>
+        <div className="features-grid-new">
+          {features.map((f, i) => (
+            <div 
+              key={i} 
+              className={`feature-card-new ${hoveredFeature === i ? 'active' : ''}`}
+              onMouseEnter={() => setHoveredFeature(i)}
+              onMouseLeave={() => setHoveredFeature(null)}
+            >
+              <div className="feature-icon-new">{f.icon}</div>
+              <h4>{f.title}</h4>
+              <p>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Tech Stack */}
+      <section className="tech-section">
+        <h2>Built With</h2>
+        <div className="tech-grid">
+          {tech.map((t, i) => (
+            <div key={i} className="tech-card">
+              <span className="tech-icon">{t.icon}</span>
+              <span className="tech-name">{t.name}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="team-section-new">
+        <h2>Meet the Team</h2>
+        <div className="team-grid-new">
+          {team.map((m, i) => (
+            <div key={i} className="team-card-new">
+              <div className="team-photo-placeholder">
+                <span>{m.icon}</span>
+              </div>
+              <h3 className="team-name">{m.name}</h3>
+              <p className="team-role">{m.role}</p>
+            </div>
+          ))}
+        </div>
+        <p className="guide-text">
+          <span className="guide-icon">👨‍🏫</span>
+          Guided by <strong>Mr. Karan Kumar Das</strong> — LPU
+        </p>
+      </section>
+
+      {/* CTA */}
+      <section className="about-cta-section">
+        <div className="cta-content">
+          <h2>Ready to Boost Your Exports?</h2>
+          <Link to="/recommend" className="cta-btn-new">Get Started →</Link>
+        </div>
+      </section>
     </div>
   );
 }
