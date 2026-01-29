@@ -259,3 +259,22 @@ form button:active {
   .about-page .about-grid { grid-template-columns: 1fr; }
   .about-photo { width: 120px; margin: 0 0 8px; }
 }
+
+  /* About page specific */
+  .about-content .lead { color: var(--text-light); font-size: 1.05rem; margin-bottom: 18px; }
+  .card { background: white; padding: 18px; border-radius: 12px; margin-bottom: 18px; border: 1px solid var(--border); box-shadow: 0 10px 20px rgba(0,0,0,0.03); }
+  .feature-chips { display:flex; flex-wrap:wrap; gap:10px; }
+  .chip { padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:transparent; cursor:pointer; transition:all .18s ease; }
+  .chip:hover { transform:translateY(-3px); }
+  .chip.active { background:linear-gradient(90deg,var(--primary),var(--secondary)); color:white; border:none; }
+  .tech-list { display:flex; flex-wrap:wrap; gap:8px; }
+  .tech { background:var(--light); padding:6px 10px; border-radius:8px; color:var(--text); font-weight:600; font-size:0.95rem; }
+  .team-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:10px; }
+  .team-card { display:flex; gap:12px; align-items:center; background:var(--light); padding:10px; border-radius:10px; }
+  .team-avatar { width:48px; height:48px; border-radius:50%; background:linear-gradient(90deg,var(--primary),var(--secondary)); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; }
+  .muted { color:var(--text-light); font-size:0.95rem; }
+  .stats-row { display:flex; gap:18px; justify-content:space-between; flex-wrap:wrap; }
+  .stat { background:linear-gradient(90deg, rgba(37,99,235,0.06), rgba(16,185,129,0.04)); padding:16px; border-radius:12px; min-width:160px; text-align:center; }
+  .stat-value { font-size:1.4rem; font-weight:700; color:var(--primary); }
+  .stat-label { color:var(--text-light); margin-top:6px; }
+
