@@ -1,52 +1,52 @@
 function FAQ() {
   const faqs = [
     {
-      q: "What is the Export-Oriented Indian Agro Value Optimization System?",
-      a: "This system is a web-based decision support tool that helps farmers select the most suitable and profitable crops for export based on soil conditions, climate factors, region, and season using data analytics and machine learning techniques."
+      q: "What is the purpose of this system?",
+      a: "To help farmers select the most suitable crops for export based on soil conditions, climate factors, region, and season using data-driven analysis."
     },
     {
-      q: "Who can use this system?",
-      a: "The system is primarily designed for farmers, agricultural planners, and stakeholders interested in export-oriented crop planning. It can also be used by researchers and students for academic and learning purposes."
+      q: "Who can use this tool?",
+      a: "This tool is designed for farmers, agricultural advisors, agronomists, and students who are interested in export-oriented crop planning."
     },
     {
-      q: "What kind of inputs does the system require?",
-      a: "The system requires basic information such as region, season, soil type, temperature, rainfall, irrigation type, and previous crop. These inputs are easy to understand and commonly known by farmers."
+      q: "What information do I need to use the crop prediction feature?",
+      a: "You need basic details such as your region, current season, soil type, approximate rainfall, temperature, and irrigation method."
+    },
+    {
+      q: "Do I need technical knowledge to use this website?",
+      a: "No. The website is designed to be simple and easy to use, even for users with limited technical or computer knowledge."
     },
     {
       q: "How does the system recommend crops?",
-      a: "The system analyzes the provided inputs and compares them with historical agricultural, climate, and export-related data. Based on learned patterns, it predicts the most suitable crop for cultivation with better export potential."
+      a: "The system analyzes user inputs and compares them with historical agricultural, climate, and export data using data analytics and machine learning techniques."
     },
     {
-      q: "Does the system provide real-time market prices?",
-      a: "No. The current version uses historical export and agricultural data for analysis. Real-time market price integration can be added in future versions using live APIs."
+      q: "Does this system provide real-time market prices?",
+      a: "No. The current version uses historical data for analysis. Real-time price and weather integration may be added in future versions."
     },
     {
       q: "How accurate are the crop recommendations?",
-      a: "The accuracy depends on the quality and quantity of historical data used for training the model. The system provides data-driven recommendations, but actual results may vary due to unpredictable factors such as weather changes and market fluctuations."
+      a: "The recommendations are based on historical data and learned patterns. Actual results may vary due to weather changes, soil conditions, and market fluctuations."
     },
     {
-      q: "Is machine learning really necessary for this project?",
-      a: "Yes. Machine learning helps identify complex relationships between soil, climate, and market data that are difficult to analyze using traditional methods. It improves prediction quality as more data becomes available."
+      q: "Can I use this system for all crops?",
+      a: "The system currently supports selected major Indian crops with export potential. Support for more crops can be added in future updates."
     },
     {
-      q: "What machine learning models are used?",
-      a: "The system uses machine learning models such as Random Forest and XGBoost for crop suitability and profit prediction due to their effectiveness in handling agricultural datasets."
+      q: "Is this system suitable for small-scale farmers?",
+      a: "Yes. The system is designed to support both small-scale and large-scale farmers by providing guidance for better crop selection."
     },
     {
-      q: "Can this system replace agricultural experts?",
-      a: "No. This system is intended to support decision-making and should be used alongside expert advice. It acts as a guidance tool rather than a replacement for professional agricultural consultation."
-    },
-    {
-      q: "What are the limitations of this system?",
-      a: "The system does not currently use real-time data, does not account for sudden climate events, and is limited to selected crops and regions. These limitations can be addressed in future enhancements."
+      q: "Does this system replace agricultural experts?",
+      a: "No. This system is a decision-support tool and should be used along with expert advice and local farming knowledge."
     },
     {
       q: "What technologies are used in this project?",
-      a: "The frontend is developed using React.js, the backend uses Python with Flask, and machine learning models are implemented using libraries such as Scikit-learn and XGBoost."
+      a: "The system uses React.js for the frontend, Python and Flask for the backend, and machine learning libraries for prediction."
     },
     {
-      q: "What is the future scope of this project?",
-      a: "Future improvements include real-time weather and market price integration, support for more crops and regions, multilingual interfaces, mobile app development, and advanced risk prediction models."
+      q: "What are the future enhancements planned for this system?",
+      a: "Future improvements include real-time data integration, support for more regions and crops, multilingual support, and mobile application development."
     }
   ];
 
