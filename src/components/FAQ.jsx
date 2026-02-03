@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function FAQ() {
   const faqs = [
     {
@@ -6,7 +8,8 @@ function FAQ() {
     },
     {
       q: "Who can use this tool?",
-      a: "This tool is designed for farmers, agricultural advisors, agronomists, and students who are interested in export-oriented crop planning."
+      a: "This tool is designed for farmers, agricultural advisors, agronomists, and students who are interested in export-oriented crop planning.",
+      hasLink: true
     },
     {
       q: "What information do I need to use the crop prediction feature?",
@@ -58,6 +61,12 @@ function FAQ() {
           <details key={i} className="faq-item">
             <summary>{f.q}</summary>
             <p>{f.a}</p>
+            {f.hasLink && (
+              <div className="faq-link-wrapper">
+                <p>Click here to see how you can use the tool:</p>
+                <Link to="/howto" className="faq-link-btn">How to Use</Link>
+              </div>
+            )}
           </details>
         ))}
       </div>

@@ -246,6 +246,23 @@ form button:active {
 .faq-item { background: white; padding: 12px 14px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.04); border:1px solid var(--border); }
 .faq-item summary { cursor: pointer; font-weight:600; outline:none; }
 .faq-item p { margin:8px 0 0; color:var(--text-light); }
+.faq-link-wrapper { margin-top: 12px; }
+.faq-link-wrapper p { margin-bottom: 8px; font-size: 0.95rem; }
+.faq-link-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.faq-link-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
 
 /* About page tweaks */
 .about-page .about-grid { display: block; max-width: 1100px; margin: 0 auto; }
