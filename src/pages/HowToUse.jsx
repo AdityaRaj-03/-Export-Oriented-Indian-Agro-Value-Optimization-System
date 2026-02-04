@@ -51,17 +51,38 @@ function HowToUse() {
           <div className="hero-circle circle-1"></div>
           <div className="hero-circle circle-2"></div>
           <div className="hero-circle circle-3"></div>
+          <div className="hero-wave"></div>
         </div>
         
         <div className="howto-hero-main">
           <div className="howto-hero-content">
-            <span className="howto-badge">
-              <span className="badge-dot"></span>
-              User Guide
-            </span>
-            <h1>How to Use <span className="highlight">the System</span></h1>
-            <p>A simple step-by-step guide to get practical crop recommendations tailored to your farming conditions.</p>
+            <div className="howto-badge-modern">
+              <span className="badge-glow"></span>
+              <span className="badge-icon">📖</span>
+              <span className="badge-text">User Guide</span>
+            </div>
             
+            <h1>Learn How to <span className="highlight">Get Started</span></h1>
+            <p>Follow our simple 5-step process to receive personalized crop recommendations tailored to your farming conditions.</p>
+            
+            {/* Quick Stats */}
+            <div className="howto-quick-stats">
+              <div className="howto-stat-item">
+                <span className="stat-number">5</span>
+                <span className="stat-label">Easy Steps</span>
+              </div>
+              <div className="stat-divider"></div>
+              <div className="howto-stat-item">
+                <span className="stat-number">2 min</span>
+                <span className="stat-label">Average Time</span>
+              </div>
+              <div className="stat-divider"></div>
+              <div className="howto-stat-item">
+                <span className="stat-number">100%</span>
+                <span className="stat-label">Free to Use</span>
+              </div>
+            </div>
+
             <div className="howto-hero-actions">
               <Link to="/recommend" className="howto-btn primary">
                 <span>🌱</span> Try It Now
@@ -72,28 +93,59 @@ function HowToUse() {
             </div>
           </div>
 
-          {/* Visual Steps Preview */}
+          {/* Enhanced Visual Steps Preview */}
           <div className="howto-hero-visual">
-            <div className="steps-preview">
-              <div className="preview-step">
-                <div className="preview-num">1</div>
-                <span>Enter Details</span>
+            <div className="steps-preview-enhanced">
+              <div className="steps-preview-header">
+                <span className="preview-icon">🎯</span>
+                <span>Quick Overview</span>
               </div>
-              <div className="preview-connector"></div>
-              <div className="preview-step">
-                <div className="preview-num">2</div>
-                <span>Submit Form</span>
+              <div className="steps-preview-body">
+                <div className="preview-step-enhanced">
+                  <div className="step-indicator">
+                    <div className="step-line done"></div>
+                    <div className="step-dot done">✓</div>
+                  </div>
+                  <div className="step-info">
+                    <span className="step-title">Enter Details</span>
+                    <span className="step-desc">Fill your farm info</span>
+                  </div>
+                </div>
+                
+                <div className="preview-step-enhanced active">
+                  <div className="step-indicator">
+                    <div className="step-line"></div>
+                    <div className="step-dot active">
+                      <span className="dot-pulse"></span>
+                    </div>
+                  </div>
+                  <div className="step-info">
+                    <span className="step-title">Process Data</span>
+                    <span className="step-desc">AI analyzes inputs</span>
+                  </div>
+                </div>
+                
+                <div className="preview-step-enhanced">
+                  <div className="step-indicator">
+                    <div className="step-dot pending">3</div>
+                  </div>
+                  <div className="step-info">
+                    <span className="step-title">Get Results</span>
+                    <span className="step-desc">View recommendations</span>
+                  </div>
+                </div>
               </div>
-              <div className="preview-connector"></div>
-              <div className="preview-step active">
-                <div className="preview-num">3</div>
-                <span>Get Results</span>
+              <div className="steps-preview-footer">
+                <span className="footer-icon">⚡</span>
+                <span>Results in seconds</span>
               </div>
             </div>
+            
             <div className="hero-floating-icons">
               <span className="float-icon f1">📋</span>
               <span className="float-icon f2">✨</span>
               <span className="float-icon f3">🌾</span>
+              <span className="float-icon f4">🚀</span>
             </div>
           </div>
         </div>
