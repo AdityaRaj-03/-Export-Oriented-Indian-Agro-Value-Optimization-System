@@ -31,7 +31,13 @@ function FAQ({ showSearch = true, showCategories = true }) {
       q: "What information do I need to use the crop prediction feature?",
       a: "You need basic details such as your region, current season, soil type, approximate rainfall, temperature, and irrigation method.",
       category: "usage",
-      icon: "📝",
+      icon: "📝"
+    },
+    {
+      q: "How to use this tool?",
+      a: "Using this tool is simple! Just navigate to the Crop Recommendation page, fill in your region, season, soil type, rainfall, temperature, and irrigation method, then click submit to get personalized crop recommendations for export.",
+      category: "usage",
+      icon: "🚀",
       hasLink: true
     },
     {
