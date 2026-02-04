@@ -22,7 +22,23 @@ function CropRecommendation() {
   return (
     <div className="page crop-page">
       {/* Hero Section */}
-      <div className="crop-hero">
+      <div className="crop-hero premium-hero-base">
+        {/* Premium Background Elements */}
+        <div className="hero-grid-pattern"></div>
+        <div className="hero-glow-orb orb-1"></div>
+        <div className="hero-glow-orb orb-2"></div>
+        <div className="hero-glow-orb orb-3"></div>
+        <div className="hero-particles">
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+        </div>
+        <div className="hero-border-glow"></div>
+        
         <div className="crop-hero-bg">
           <div className="crop-circle circle-1"></div>
           <div className="crop-circle circle-2"></div>

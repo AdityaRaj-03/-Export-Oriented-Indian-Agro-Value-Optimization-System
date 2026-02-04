@@ -270,10 +270,149 @@ form button:active {
   overflow-x: hidden;
 }
 
+/* ========== PREMIUM HERO BASE STYLES ========== */
+.premium-hero-base {
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-hero-base::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 30% at 50% 80%, rgba(251, 191, 36, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.premium-hero-base::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* Animated Grid Pattern */
+.hero-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-move 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes grid-move {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(60px, 60px); }
+}
+
+/* Glowing Orbs */
+.hero-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: orb-float 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-glow-orb.orb-1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, transparent 70%);
+  top: -100px;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.hero-glow-orb.orb-2 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+  bottom: -80px;
+  left: 5%;
+  animation-delay: 2s;
+}
+
+.hero-glow-orb.orb-3 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.25) 0%, transparent 70%);
+  top: 40%;
+  left: 30%;
+  animation-delay: 4s;
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  25% { transform: translate(20px, -20px) scale(1.1); opacity: 0.8; }
+  50% { transform: translate(-10px, 10px) scale(0.95); opacity: 0.5; }
+  75% { transform: translate(15px, 15px) scale(1.05); opacity: 0.7; }
+}
+
+/* Floating Particles */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: particle-rise 10s linear infinite;
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 10s; }
+.particle:nth-child(3) { left: 35%; animation-delay: 4s; animation-duration: 14s; }
+.particle:nth-child(4) { left: 50%; animation-delay: 1s; animation-duration: 11s; }
+.particle:nth-child(5) { left: 65%; animation-delay: 3s; animation-duration: 13s; }
+.particle:nth-child(6) { left: 80%; animation-delay: 5s; animation-duration: 9s; }
+.particle:nth-child(7) { left: 90%; animation-delay: 2.5s; animation-duration: 15s; }
+
+@keyframes particle-rise {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100px) scale(1); opacity: 0; }
+}
+
+/* Animated Border Glow */
+.hero-border-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(16, 185, 129, 0.8) 20%, 
+    rgba(59, 130, 246, 0.8) 50%, 
+    rgba(251, 191, 36, 0.8) 80%, 
+    transparent 100%);
+  animation: border-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes border-shimmer {
+  0%, 100% { opacity: 0.5; transform: scaleX(0.8); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
+
 /* How To Hero */
 .howto-hero {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #134e4a 100%);
-  padding: 80px 40px 120px;
+  background: linear-gradient(135deg, #0a1f1a 0%, #0f2f25 40%, #1a3d2e 70%, #0d2818 100%);
+  padding: 100px 40px 140px;
   position: relative;
   overflow: hidden;
 }
@@ -289,29 +428,32 @@ form button:active {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80px;
-  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.03) 100%);
+  height: 120px;
+  background: 
+    linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.05) 50%, rgba(255,255,255,0.02) 100%);
+  clip-path: polygon(0 60%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .howto-hero .hero-circle {
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
   animation: pulse-glow 4s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .howto-hero .circle-1 {
-  width: 400px;
-  height: 400px;
-  top: -150px;
-  right: -100px;
+  width: 500px;
+  height: 500px;
+  top: -200px;
+  right: -150px;
 }
 
 .howto-hero .circle-2 {
-  width: 300px;
-  height: 300px;
-  bottom: -100px;
-  left: -50px;
+  width: 350px;
+  height: 350px;
+  bottom: -150px;
+  left: -100px;
   animation-delay: 1s;
 }
 
@@ -945,8 +1087,8 @@ form button:active {
 }
 
 .crop-hero {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #134e4a 100%);
-  padding: 60px 40px 80px;
+  background: linear-gradient(135deg, #0a1f1a 0%, #0f2f25 40%, #1a3d2e 70%, #0d2818 100%);
+  padding: 80px 40px 100px;
   position: relative;
   overflow: hidden;
 }
@@ -960,22 +1102,23 @@ form button:active {
 .crop-circle {
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
   animation: pulse-glow 4s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .crop-hero .circle-1 {
-  width: 350px;
-  height: 350px;
-  top: -100px;
-  right: -80px;
+  width: 450px;
+  height: 450px;
+  top: -150px;
+  right: -120px;
 }
 
 .crop-hero .circle-2 {
-  width: 250px;
-  height: 250px;
-  bottom: -80px;
-  left: -50px;
+  width: 300px;
+  height: 300px;
+  bottom: -120px;
+  left: -80px;
   animation-delay: 1s;
 }
 
@@ -1338,12 +1481,12 @@ form button:active {
 
 /* ========== Enhanced FAQ Hero ========== */
 .faq-hero-enhanced {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #134e4a 100%);
-  padding: 60px 40px 180px;
+  background: linear-gradient(135deg, #0a1f1a 0%, #0f2f25 40%, #1a3d2e 70%, #0d2818 100%);
+  padding: 80px 40px 200px;
   margin: -60px -40px 0;
   position: relative;
   overflow: visible;
-  min-height: 620px;
+  min-height: 650px;
 }
 
 /* Animated Background Elements */
@@ -1359,31 +1502,32 @@ form button:active {
 .bg-circle {
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
   animation: pulse-glow 4s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .circle-1 {
-  width: 400px;
-  height: 400px;
-  top: -150px;
-  right: -100px;
+  width: 500px;
+  height: 500px;
+  top: -200px;
+  right: -150px;
   animation-delay: 0s;
 }
 
 .circle-2 {
-  width: 300px;
-  height: 300px;
-  bottom: -100px;
-  left: -50px;
+  width: 350px;
+  height: 350px;
+  bottom: -150px;
+  left: -100px;
   animation-delay: 1s;
 }
 
 .circle-3 {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   top: 50%;
-  left: 30%;
+  left: 25%;
   animation-delay: 2s;
 }
 

@@ -13,7 +13,23 @@ function FAQPage() {
 
   return (
     <div className="page faq-page">
-      <div className="faq-hero-enhanced">
+      <div className="faq-hero-enhanced premium-hero-base">
+        {/* Premium Background Elements */}
+        <div className="hero-grid-pattern"></div>
+        <div className="hero-glow-orb orb-1"></div>
+        <div className="hero-glow-orb orb-2"></div>
+        <div className="hero-glow-orb orb-3"></div>
+        <div className="hero-particles">
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+        </div>
+        <div className="hero-border-glow"></div>
+        
         {/* Animated background elements */}
         <div className="faq-hero-bg-elements">
           <div className="bg-circle circle-1"></div>

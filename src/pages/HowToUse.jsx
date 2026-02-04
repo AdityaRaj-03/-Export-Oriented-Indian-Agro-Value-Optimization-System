@@ -46,7 +46,23 @@ function HowToUse() {
   return (
     <div className="page howto-page">
       {/* Hero Section */}
-      <div className="howto-hero">
+      <div className="howto-hero premium-hero-base">
+        {/* Premium Background Elements */}
+        <div className="hero-grid-pattern"></div>
+        <div className="hero-glow-orb orb-1"></div>
+        <div className="hero-glow-orb orb-2"></div>
+        <div className="hero-glow-orb orb-3"></div>
+        <div className="hero-particles">
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+          <span className="particle"></span>
+        </div>
+        <div className="hero-border-glow"></div>
+        
         <div className="howto-hero-bg">
           <div className="hero-circle circle-1"></div>
           <div className="hero-circle circle-2"></div>
