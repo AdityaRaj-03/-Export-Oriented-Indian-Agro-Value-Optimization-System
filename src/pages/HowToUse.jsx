@@ -84,16 +84,19 @@ function HowToUse() {
             {/* Quick Stats */}
             <div className="howto-quick-stats">
               <div className="howto-stat-item">
+                <span className="stat-icon-badge">📋</span>
                 <span className="stat-number">5</span>
                 <span className="stat-label">Easy Steps</span>
               </div>
               <div className="stat-divider"></div>
               <div className="howto-stat-item">
+                <span className="stat-icon-badge">⚡</span>
                 <span className="stat-number">2 min</span>
                 <span className="stat-label">Average Time</span>
               </div>
               <div className="stat-divider"></div>
               <div className="howto-stat-item">
+                <span className="stat-icon-badge">🎁</span>
                 <span className="stat-number">100%</span>
                 <span className="stat-label">Free to Use</span>
               </div>

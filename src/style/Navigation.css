@@ -114,6 +114,15 @@
   width: 100%;
 }
 
+/* Active page indicator */
+.nav-link.active {
+  color: var(--primary);
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .nav-container {
     padding: 0 20px;

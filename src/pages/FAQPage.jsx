@@ -57,16 +57,19 @@ function FAQPage() {
             {/* Quick Stats */}
             <div className="faq-quick-stats">
               <div className="stat-item">
+                <span className="stat-icon-badge">📚</span>
                 <span className="stat-number">13+</span>
                 <span className="stat-label">FAQs Covered</span>
               </div>
               <div className="stat-divider"></div>
               <div className="stat-item">
+                <span className="stat-icon-badge">🏷️</span>
                 <span className="stat-number">5</span>
                 <span className="stat-label">Categories</span>
               </div>
               <div className="stat-divider"></div>
               <div className="stat-item">
+                <span className="stat-icon-badge">🌐</span>
                 <span className="stat-number">24/7</span>
                 <span className="stat-label">Available</span>
               </div>

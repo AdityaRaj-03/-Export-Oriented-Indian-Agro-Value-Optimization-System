@@ -412,7 +412,7 @@ form button:active {
 /* How To Hero */
 .howto-hero {
   background: linear-gradient(180deg, #87CEEB 0%, #98d9a8 40%, #7ec88b 70%, #5cb870 100%);
-  padding: 100px 40px 140px;
+  padding: 20px 40px 30px;
   position: relative;
   overflow: hidden;
 }
@@ -538,55 +538,114 @@ form button:active {
   letter-spacing: 0.5px;
 }
 
-/* Quick Stats for HowTo */
+/* Quick Stats for HowTo - Premium Design */
 .howto-quick-stats {
   display: flex;
-  align-items: center;
-  gap: 24px;
+  align-items: stretch;
+  gap: 0;
   margin-bottom: 32px;
-  padding: 20px 28px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(22, 101, 52, 0.1);
-  border-radius: 20px;
-  flex-wrap: wrap;
-  box-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255,255,255,0.9);
+  padding: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.95) 100%);
+  border: 2px solid rgba(22, 163, 74, 0.15);
+  border-radius: 24px;
+  width: fit-content;
   animation: fadeInUp 0.6s ease 0.35s backwards;
-  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 
+    0 25px 60px rgba(22, 101, 52, 0.12),
+    0 10px 20px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255,255,255,1);
+  position: relative;
 }
 
-.howto-quick-stats:hover {
-  transform: translateY(-2px);
-  box-shadow: 
-    0 8px 30px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255,255,255,0.9);
+.howto-quick-stats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #16a34a, #22c55e, #16a34a);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .howto-stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px 36px;
+  background: transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: default;
+  position: relative;
+  overflow: hidden;
+  min-width: 140px;
+}
+
+.howto-stat-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+  border-radius: 3px 3px 0 0;
+  transition: width 0.3s ease;
+}
+
+.howto-stat-item:hover::after {
+  width: 60%;
 }
 
 .howto-stat-item:hover {
-  background: rgba(22, 163, 74, 0.08);
+  background: linear-gradient(180deg, rgba(22, 163, 74, 0.06) 0%, rgba(22, 163, 74, 0.12) 100%);
+}
+
+/* Icon Badge for Stats */
+.stat-icon-badge {
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(22, 163, 74, 0.12) 0%, rgba(34, 197, 94, 0.18) 100%);
+  border-radius: 16px;
+  margin-bottom: 4px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  border: 2px solid rgba(22, 163, 74, 0.15);
+}
+
+.howto-stat-item:hover .stat-icon-badge {
+  transform: scale(1.15) rotate(5deg);
+  background: linear-gradient(135deg, rgba(22, 163, 74, 0.2) 0%, rgba(34, 197, 94, 0.28) 100%);
+  box-shadow: 0 8px 25px rgba(22, 163, 74, 0.25);
+  border-color: rgba(22, 163, 74, 0.3);
 }
 
 .howto-stat-item .stat-number {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 800;
   background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  line-height: 1;
 }
 
 .howto-stat-item:hover .stat-number {
@@ -594,17 +653,20 @@ form button:active {
 }
 
 .howto-stat-item .stat-label {
-  font-size: 0.8rem;
-  color: #2d5a40;
-  font-weight: 600;
+  font-size: 0.7rem;
+  color: #4a7c59;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.2px;
+  position: relative;
+  z-index: 1;
 }
 
 .howto-quick-stats .stat-divider {
   width: 1px;
-  height: 40px;
-  background: rgba(22, 101, 52, 0.2);
+  align-self: stretch;
+  margin: 20px 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(22, 101, 52, 0.25) 50%, transparent 100%);
 }
 
 /* Enhanced Steps Preview Visual */
@@ -868,8 +930,8 @@ form button:active {
 
 .howto-hero-actions {
   display: flex;
-  gap: 16px;
-  justify-content: center;
+  gap: 40px;
+  justify-content: flex-start;
   flex-wrap: wrap;
   animation: fadeInUp 0.6s ease 0.4s backwards;
 }
@@ -1870,55 +1932,109 @@ form button:active {
   animation: fadeInUp 0.6s ease 0.25s backwards;
 }
 
-/* Quick Stats */
+/* Quick Stats - Premium Design */
 .faq-quick-stats {
   display: flex;
-  align-items: center;
-  gap: 24px;
+  align-items: stretch;
+  gap: 0;
   margin-bottom: 28px;
-  padding: 20px 28px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.88) 100%);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 2px solid rgba(22, 101, 52, 0.1);
+  padding: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.95) 100%);
+  border: 2px solid rgba(22, 163, 74, 0.15);
+  border-radius: 24px;
   width: fit-content;
-  box-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255,255,255,0.9);
   animation: fadeInUp 0.6s ease 0.3s backwards;
-  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 
+    0 25px 60px rgba(22, 101, 52, 0.12),
+    0 10px 20px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255,255,255,1);
+  position: relative;
 }
 
-.faq-quick-stats:hover {
-  transform: translateY(-2px);
-  box-shadow: 
-    0 8px 30px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255,255,255,0.9);
+.faq-quick-stats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #16a34a, #22c55e, #16a34a);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
 }
 
 .stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px 36px;
+  background: transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: default;
+  position: relative;
+  overflow: hidden;
+  min-width: 140px;
+}
+
+.stat-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+  border-radius: 3px 3px 0 0;
+  transition: width 0.3s ease;
+}
+
+.stat-item:hover::after {
+  width: 60%;
 }
 
 .stat-item:hover {
-  background: rgba(22, 163, 74, 0.08);
+  background: linear-gradient(180deg, rgba(22, 163, 74, 0.06) 0%, rgba(22, 163, 74, 0.12) 100%);
+}
+
+/* Icon Badge for FAQ Stats */
+.stat-item .stat-icon-badge {
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(22, 163, 74, 0.12) 0%, rgba(34, 197, 94, 0.18) 100%);
+  border-radius: 16px;
+  margin-bottom: 4px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  border: 2px solid rgba(22, 163, 74, 0.15);
+}
+
+.stat-item:hover .stat-icon-badge {
+  transform: scale(1.15) rotate(5deg);
+  background: linear-gradient(135deg, rgba(22, 163, 74, 0.2) 0%, rgba(34, 197, 94, 0.28) 100%);
+  box-shadow: 0 8px 25px rgba(22, 163, 74, 0.25);
+  border-color: rgba(22, 163, 74, 0.3);
 }
 
 .stat-number {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 800;
   background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  line-height: 1;
 }
 
 .stat-item:hover .stat-number {
@@ -1926,17 +2042,20 @@ form button:active {
 }
 
 .stat-label {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #4a7c59;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 600;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
 }
 
 .stat-divider {
   width: 1px;
-  height: 40px;
-  background: rgba(22, 101, 52, 0.2);
+  align-self: stretch;
+  margin: 20px 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(22, 101, 52, 0.25) 50%, transparent 100%);
 }
 
 /* Hero Action Buttons */
