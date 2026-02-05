@@ -60,6 +60,16 @@ function About() {
     <div className="page about-page-new">
       {/* Hero Section */}
       <section className="about-hero">
+        {/* Elegant Landscape */}
+        <div className="landscape-scene">
+          <div className="horizon-glow"></div>
+          <div className="field-layer layer-1"></div>
+          <div className="field-layer layer-2"></div>
+          <div className="field-layer layer-3"></div>
+          <div className="field-layer layer-4"></div>
+          <div className="field-texture"></div>
+        </div>
+        
         <div className="about-hero-content">
           <span className="badge">🌍 Export-Ready Solutions</span>
           <h1>Empowering Indian<br /><span className="gradient-text">Farmers</span> Globally</h1>

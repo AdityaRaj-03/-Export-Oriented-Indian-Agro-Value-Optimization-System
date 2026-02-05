@@ -138,6 +138,8 @@ form button:active {
 /* Hero */
 .hero {
   padding: 40px 0 24px 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-inner {
@@ -147,6 +149,8 @@ form button:active {
   gap: 32px;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-inner > div {
@@ -415,6 +419,109 @@ form button:active {
   padding: 20px 40px 60px;
   position: relative;
   overflow: hidden;
+}
+
+/* Elegant Landscape Scene */
+.landscape-scene {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.horizon-glow {
+  position: absolute;
+  top: 30%;
+  left: -10%;
+  right: -10%;
+  height: 200px;
+  background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+  animation: horizon-pulse 8s ease-in-out infinite;
+}
+
+@keyframes horizon-pulse {
+  0%, 100% { opacity: 0.6; transform: scaleY(1); }
+  50% { opacity: 0.8; transform: scaleY(1.1); }
+}
+
+.field-layer {
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(34, 139, 34, 0.08) 10%,
+    rgba(34, 139, 34, 0.12) 20%,
+    rgba(34, 139, 34, 0.08) 30%,
+    transparent 40%,
+    rgba(34, 139, 34, 0.1) 50%,
+    rgba(34, 139, 34, 0.14) 60%,
+    rgba(34, 139, 34, 0.1) 70%,
+    transparent 80%,
+    rgba(34, 139, 34, 0.08) 90%,
+    transparent 100%
+  );
+}
+
+.field-layer.layer-1 {
+  bottom: 0;
+  clip-path: polygon(0 85%, 15% 82%, 30% 86%, 50% 80%, 70% 84%, 85% 81%, 100% 85%, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, rgba(76, 153, 76, 0.3) 0%, rgba(60, 130, 60, 0.4) 100%);
+  animation: field-breathe 12s ease-in-out infinite;
+}
+
+.field-layer.layer-2 {
+  bottom: 0;
+  clip-path: polygon(0 75%, 20% 72%, 40% 76%, 55% 71%, 75% 74%, 90% 70%, 100% 75%, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, rgba(85, 160, 85, 0.25) 0%, rgba(70, 140, 70, 0.35) 100%);
+  animation: field-breathe 12s ease-in-out infinite 2s;
+}
+
+.field-layer.layer-3 {
+  bottom: 0;
+  clip-path: polygon(0 65%, 25% 62%, 45% 66%, 60% 61%, 80% 64%, 95% 60%, 100% 65%, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, rgba(100, 170, 100, 0.2) 0%, rgba(85, 150, 85, 0.3) 100%);
+  animation: field-breathe 12s ease-in-out infinite 4s;
+}
+
+.field-layer.layer-4 {
+  bottom: 0;
+  clip-path: polygon(0 55%, 30% 52%, 50% 56%, 65% 51%, 85% 54%, 100% 55%, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, rgba(120, 180, 120, 0.15) 0%, rgba(100, 160, 100, 0.25) 100%);
+  animation: field-breathe 12s ease-in-out infinite 6s;
+}
+
+@keyframes field-breathe {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.85; transform: translateY(-3px); }
+}
+
+.field-texture {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 40px,
+      rgba(255, 255, 255, 0.03) 40px,
+      rgba(255, 255, 255, 0.03) 41px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 80px,
+      rgba(255, 255, 255, 0.02) 80px,
+      rgba(255, 255, 255, 0.02) 81px
+    );
+  animation: texture-shift 30s linear infinite;
+}
+
+@keyframes texture-shift {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 50px; }
 }
 
 .howto-hero-bg {

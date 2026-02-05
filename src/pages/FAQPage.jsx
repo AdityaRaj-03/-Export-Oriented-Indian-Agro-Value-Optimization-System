@@ -14,6 +14,16 @@ function FAQPage() {
   return (
     <div className="page faq-page">
       <div className="faq-hero-enhanced premium-hero-base">
+        {/* Elegant Landscape */}
+        <div className="landscape-scene">
+          <div className="horizon-glow"></div>
+          <div className="field-layer layer-1"></div>
+          <div className="field-layer layer-2"></div>
+          <div className="field-layer layer-3"></div>
+          <div className="field-layer layer-4"></div>
+          <div className="field-texture"></div>
+        </div>
+        
         {/* Premium Background Elements */}
         <div className="hero-grid-pattern"></div>
         <div className="hero-glow-orb orb-1"></div>
