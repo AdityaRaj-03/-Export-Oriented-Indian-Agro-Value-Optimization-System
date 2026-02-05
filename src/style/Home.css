@@ -412,7 +412,7 @@ form button:active {
 /* How To Hero */
 .howto-hero {
   background: linear-gradient(180deg, #87CEEB 0%, #98d9a8 40%, #7ec88b 70%, #5cb870 100%);
-  padding: 20px 40px 30px;
+  padding: 20px 40px 60px;
   position: relative;
   overflow: hidden;
 }
@@ -558,18 +558,6 @@ form button:active {
   position: relative;
 }
 
-.howto-quick-stats::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #16a34a, #22c55e, #16a34a);
-  background-size: 200% 100%;
-  animation: shimmer 3s linear infinite;
-}
-
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
@@ -682,13 +670,30 @@ form button:active {
   border-radius: 28px;
   animation: fadeInUp 0.6s ease 0.3s backwards;
   overflow: hidden;
-  width: 320px;
+  width: 340px;
   box-shadow: 
     0 25px 60px rgba(0, 0, 0, 0.15),
     0 10px 20px rgba(22, 101, 52, 0.1),
     inset 0 1px 0 rgba(255,255,255,1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+}
+
+.steps-preview-glow {
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(22, 163, 74, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: glow-rotate 8s linear infinite;
+}
+
+@keyframes glow-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .steps-preview-enhanced::before {
@@ -704,22 +709,21 @@ form button:active {
 }
 
 .steps-preview-enhanced:hover {
-  transform: translateY(-10px) scale(1.03);
-  border-color: rgba(22, 163, 74, 0.35);
+  transform: translateY(-12px) scale(1.03);
+  border-color: rgba(22, 163, 74, 0.4);
   box-shadow: 
-    0 40px 90px rgba(0, 0, 0, 0.2),
-    0 20px 40px rgba(22, 101, 52, 0.18),
-    0 0 40px rgba(22, 163, 74, 0.1),
+    0 45px 100px rgba(0, 0, 0, 0.2),
+    0 25px 50px rgba(22, 101, 52, 0.2),
+    0 0 50px rgba(22, 163, 74, 0.12),
     inset 0 1px 0 rgba(255,255,255,1);
 }
 
 .steps-preview-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 18px 22px;
+  gap: 14px;
+  padding: 20px 24px;
   background: linear-gradient(135deg, #166534 0%, #15803d 50%, #16a34a 100%);
-  border-bottom: 1px solid rgba(22, 101, 52, 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -731,7 +735,7 @@ form button:active {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
   animation: header-shimmer 3s ease-in-out infinite;
 }
 
@@ -740,9 +744,32 @@ form button:active {
   50%, 100% { left: 100%; }
 }
 
+.header-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .steps-preview-header .preview-icon {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  position: relative;
+  z-index: 1;
   animation: icon-bounce 2s ease-in-out infinite;
+}
+
+.icon-ring {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  animation: ring-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ring-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 0; }
 }
 
 @keyframes icon-bounce {
@@ -750,31 +777,99 @@ form button:active {
   50% { transform: translateY(-3px); }
 }
 
-.steps-preview-header span:last-child {
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.header-title {
   color: white;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.1rem;
   letter-spacing: 0.3px;
 }
 
+.header-subtitle {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.header-badge {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-badge::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #4ade80;
+  border-radius: 50%;
+  animation: live-blink 1.5s ease-in-out infinite;
+}
+
+@keyframes live-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.steps-progress-bar {
+  height: 4px;
+  background: rgba(22, 101, 52, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 66%;
+  background: linear-gradient(90deg, #16a34a, #22c55e, #4ade80);
+  background-size: 200% 100%;
+  animation: progress-shimmer 2s linear infinite;
+  border-radius: 0 4px 4px 0;
+}
+
+@keyframes progress-shimmer {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
 .steps-preview-body {
-  padding: 22px;
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   position: relative;
   z-index: 1;
 }
 
 .preview-step-enhanced {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
   padding: 14px 16px;
   border-radius: 14px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: default;
   border: 1px solid transparent;
+  position: relative;
 }
 
 .preview-step-enhanced:hover {
@@ -783,14 +878,18 @@ form button:active {
 }
 
 .preview-step-enhanced.active {
-  background: linear-gradient(135deg, rgba(22, 101, 52, 0.12) 0%, rgba(22, 163, 74, 0.08) 100%);
-  border: 1px solid rgba(22, 101, 52, 0.25);
-  box-shadow: 0 4px 15px rgba(22, 101, 52, 0.1);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(59, 130, 246, 0.04) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+.preview-step-enhanced.completed {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(16, 185, 129, 0.02) 100%);
 }
 
 .preview-step-enhanced.active:hover {
   transform: translateX(6px);
-  box-shadow: 0 6px 20px rgba(22, 101, 52, 0.15);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
 }
 
 .step-indicator {
@@ -800,32 +899,34 @@ form button:active {
   position: relative;
 }
 
-.step-line {
+.step-connector {
   width: 2px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.2);
+  height: 45px;
+  background: rgba(22, 101, 52, 0.15);
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 0;
 }
 
-.step-line.done {
+.step-connector.done {
   background: linear-gradient(180deg, #10b981 0%, rgba(16, 185, 129, 0.3) 100%);
 }
 
 .step-dot {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: white;
   position: relative;
   transition: all 0.3s ease;
+  z-index: 1;
 }
 
 .preview-step-enhanced:hover .step-dot {
@@ -834,17 +935,30 @@ form button:active {
 
 .step-dot.done {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.step-dot.done .check-icon {
+  font-size: 0.9rem;
 }
 
 .step-dot.active {
   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+}
+
+.step-dot.active .dot-core {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
 }
 
 .step-dot.pending {
   background: linear-gradient(135deg, rgba(22, 101, 52, 0.08) 0%, rgba(22, 101, 52, 0.15) 100%);
-  border: 2px solid rgba(22, 101, 52, 0.3);
+  border: 2px solid rgba(22, 101, 52, 0.25);
   color: #166534;
 }
 
@@ -864,13 +978,14 @@ form button:active {
 
 @keyframes dot-pulse-anim {
   0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.6); opacity: 0; }
+  50% { transform: scale(1.8); opacity: 0; }
 }
 
 .step-info {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
 }
 
 .step-title {
@@ -894,13 +1009,42 @@ form button:active {
   color: #3d6b4a;
 }
 
+.step-status {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.step-status.completed {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+}
+
+.step-status.active {
+  background: rgba(59, 130, 246, 0.15);
+  color: #2563eb;
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.step-status.pending {
+  background: rgba(22, 101, 52, 0.1);
+  color: #4a7c59;
+}
+
 .steps-preview-footer {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-between;
   padding: 16px 22px;
-  background: linear-gradient(135deg, rgba(22, 101, 52, 0.08) 0%, rgba(21, 128, 61, 0.12) 100%);
+  background: linear-gradient(135deg, rgba(22, 101, 52, 0.06) 0%, rgba(21, 128, 61, 0.1) 100%);
   border-top: 1px solid rgba(22, 101, 52, 0.1);
   position: relative;
   overflow: hidden;
@@ -916,21 +1060,48 @@ form button:active {
   background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.3), transparent);
 }
 
+.footer-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .steps-preview-footer .footer-icon {
-  font-size: 1.1rem;
-  animation: pulse-icon 2s ease-in-out infinite;
+  font-size: 1.2rem;
+  animation: zap-pulse 1.5s ease-in-out infinite;
 }
 
-@keyframes pulse-icon {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.8; }
+@keyframes zap-pulse {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-5deg); }
+  75% { transform: scale(1.1) rotate(5deg); }
 }
 
-.steps-preview-footer span:last-child {
+.footer-text {
   color: #166534;
   font-weight: 700;
   font-size: 0.9rem;
   letter-spacing: 0.3px;
+}
+
+.footer-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-dot {
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  border-radius: 50%;
+  animation: action-blink 1s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(22, 163, 74, 0.5);
+}
+
+@keyframes action-blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
 }
 
 .hero-floating-icons {

@@ -84,19 +84,16 @@ function HowToUse() {
             {/* Quick Stats */}
             <div className="howto-quick-stats">
               <div className="howto-stat-item">
-                <span className="stat-icon-badge">📋</span>
                 <span className="stat-number">5</span>
                 <span className="stat-label">Easy Steps</span>
               </div>
               <div className="stat-divider"></div>
               <div className="howto-stat-item">
-                <span className="stat-icon-badge">⚡</span>
                 <span className="stat-number">2 min</span>
                 <span className="stat-label">Average Time</span>
               </div>
               <div className="stat-divider"></div>
               <div className="howto-stat-item">
-                <span className="stat-icon-badge">🎁</span>
                 <span className="stat-number">100%</span>
                 <span className="stat-label">Free to Use</span>
               </div>
@@ -115,48 +112,72 @@ function HowToUse() {
           {/* Enhanced Visual Steps Preview */}
           <div className="howto-hero-visual">
             <div className="steps-preview-enhanced">
+              <div className="steps-preview-glow"></div>
               <div className="steps-preview-header">
-                <span className="preview-icon">🎯</span>
-                <span>Quick Overview</span>
+                <div className="header-icon-wrapper">
+                  <span className="preview-icon">🎯</span>
+                  <span className="icon-ring"></span>
+                </div>
+                <div className="header-text">
+                  <span className="header-title">Quick Overview</span>
+                  <span className="header-subtitle">3 simple steps</span>
+                </div>
+                <div className="header-badge">LIVE</div>
+              </div>
+              <div className="steps-progress-bar">
+                <div className="progress-fill"></div>
               </div>
               <div className="steps-preview-body">
-                <div className="preview-step-enhanced">
+                <div className="preview-step-enhanced completed">
                   <div className="step-indicator">
-                    <div className="step-line done"></div>
-                    <div className="step-dot done">✓</div>
+                    <div className="step-connector done"></div>
+                    <div className="step-dot done">
+                      <span className="check-icon">✓</span>
+                    </div>
                   </div>
                   <div className="step-info">
                     <span className="step-title">Enter Details</span>
                     <span className="step-desc">Fill your farm info</span>
                   </div>
+                  <span className="step-status completed">Done</span>
                 </div>
                 
                 <div className="preview-step-enhanced active">
                   <div className="step-indicator">
-                    <div className="step-line"></div>
+                    <div className="step-connector"></div>
                     <div className="step-dot active">
                       <span className="dot-pulse"></span>
+                      <span className="dot-core"></span>
                     </div>
                   </div>
                   <div className="step-info">
                     <span className="step-title">Process Data</span>
                     <span className="step-desc">AI analyzes inputs</span>
                   </div>
+                  <span className="step-status active">In Progress</span>
                 </div>
                 
-                <div className="preview-step-enhanced">
+                <div className="preview-step-enhanced pending">
                   <div className="step-indicator">
-                    <div className="step-dot pending">3</div>
+                    <div className="step-dot pending">
+                      <span>3</span>
+                    </div>
                   </div>
                   <div className="step-info">
                     <span className="step-title">Get Results</span>
                     <span className="step-desc">View recommendations</span>
                   </div>
+                  <span className="step-status pending">Waiting</span>
                 </div>
               </div>
               <div className="steps-preview-footer">
-                <span className="footer-icon">⚡</span>
-                <span>Results in seconds</span>
+                <div className="footer-content">
+                  <span className="footer-icon">⚡</span>
+                  <span className="footer-text">Results in seconds</span>
+                </div>
+                <div className="footer-action">
+                  <span className="action-dot"></span>
+                </div>
               </div>
             </div>
             
