@@ -7,16 +7,6 @@ function HomePage() {
   return (
     <div className="page">
       <section className="hero">
-        {/* Elegant Landscape */}
-        <div className="landscape-scene">
-          <div className="horizon-glow"></div>
-          <div className="field-layer layer-1"></div>
-          <div className="field-layer layer-2"></div>
-          <div className="field-layer layer-3"></div>
-          <div className="field-layer layer-4"></div>
-          <div className="field-texture"></div>
-        </div>
-        
         <div className="hero-inner">
           <div>
             <h1>Grow Smarter, Export Better</h1>
