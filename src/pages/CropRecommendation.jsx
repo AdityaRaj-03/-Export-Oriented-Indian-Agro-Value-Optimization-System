@@ -95,6 +95,13 @@ function CropRecommendation() {
             </div>
           </div>
         </div>
+
+        <div className="crop-scroll-cue" aria-label="Swipe up to continue">
+          <span className="crop-swipe-text">Swipe up</span>
+          <span className="crop-swipe-track" aria-hidden="true">
+            <span className="crop-swipe-dot"></span>
+          </span>
+        </div>
       </div>
 
       {/* Form Section */}
