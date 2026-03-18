@@ -129,6 +129,11 @@ function FAQPage() {
             </div>
           </div>
         </div>
+
+        <div className="crop-scroll-cue faq-scroll-cue" aria-label="Swipe up to see the FAQs">
+          <span className="crop-swipe-text">SWIPE UP TO SEE THE FAQS</span>
+          <span className="crop-swipe-arrow" aria-hidden="true">↑</span>
+        </div>
       </div>
       <FAQ />
     </div>

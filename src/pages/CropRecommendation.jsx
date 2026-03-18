@@ -98,9 +98,7 @@ function CropRecommendation() {
 
         <div className="crop-scroll-cue" aria-label="Swipe up to continue">
           <span className="crop-swipe-text">Swipe up</span>
-          <span className="crop-swipe-track" aria-hidden="true">
-            <span className="crop-swipe-dot"></span>
-          </span>
+          <span className="crop-swipe-arrow" aria-hidden="true">↑</span>
         </div>
       </div>
 
