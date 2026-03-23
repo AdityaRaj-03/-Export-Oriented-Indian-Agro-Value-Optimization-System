@@ -198,6 +198,12 @@ function HowToUse() {
               <span className="float-icon f4">🚀</span>
             </div>
           </div>
+
+        </div>
+
+        <div className="crop-scroll-cue howto-scroll-cue" aria-label="Swipe up to start the tutorial">
+          <span className="crop-swipe-text">SWIPE UP<br />FOR THE TUTORIAL</span>
+          <span className="crop-swipe-arrow" aria-hidden="true">↑</span>
         </div>
       </div>
 
