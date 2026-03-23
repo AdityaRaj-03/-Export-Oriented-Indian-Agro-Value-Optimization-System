@@ -7,10 +7,27 @@ import { predictCrop } from "../data/dummyLogic";
 
 function CropRecommendation() {
   const [result, setResult] = useState(null);
+  const [isPredicting, setIsPredicting] = useState(false);
 
-  function handlePredict(formData) {
+  const cropThemeMap = {
+    Sugarcane: "theme-sugarcane",
+    Rice: "theme-rice",
+    Wheat: "theme-wheat"
+  };
+
+  const activeTheme = result ? cropThemeMap[result.crop] ?? "theme-default" : "theme-default";
+
+  async function handlePredict(formData) {
+    setIsPredicting(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 550));
     const prediction = predictCrop(formData);
     setResult(prediction);
+    setIsPredicting(false);
+  }
+
+  function handleReset() {
+    setResult(null);
   }
 
   const features = [
@@ -103,12 +120,16 @@ function CropRecommendation() {
       </div>
 
       {/* Form Section */}
-      <div className="crop-content">
-        <div className="crop-form-wrapper">
-          <CropForm onPredict={handlePredict} />
-        </div>
+      <div className={`crop-content ${activeTheme}`}>
+        <div className="crop-prediction-layout">
+          <div className="crop-form-wrapper">
+            <CropForm onPredict={handlePredict} onReset={handleReset} isPredicting={isPredicting} />
+          </div>
 
-        <Result result={result} />
+          <div className="crop-result-wrapper">
+            <Result result={result} />
+          </div>
+        </div>
 
         {/* Help Link */}
         <div className="crop-help">
