@@ -2627,15 +2627,72 @@ form button:active {
 
 .crop-input-section-title {
   margin-bottom: 12px;
-  padding: 9px 12px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.45px;
+  padding: 10px 14px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
-  color: var(--crop-accent);
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--crop-accent) 22%, white);
-  background: linear-gradient(90deg, color-mix(in srgb, var(--crop-soft-bg) 90%, white), color-mix(in srgb, var(--crop-result-soft-bg) 88%, white));
+  color: color-mix(in srgb, var(--crop-accent-strong) 78%, #0f172a);
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--crop-accent) 34%, white);
+  border-left: 5px solid var(--crop-accent-strong);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--crop-soft-bg) 78%, white), color-mix(in srgb, var(--crop-result-soft-bg) 74%, white));
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--crop-accent) 14%, transparent);
+  position: relative;
+}
+
+.crop-input-section-title::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--crop-accent-strong);
+  display: inline-block;
+  margin-right: 8px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--crop-accent-strong) 20%, transparent);
+}
+
+.crop-input-section-title.section-soil {
+  color: #92400e;
+  border-color: rgba(180, 83, 9, 0.32);
+  border-left-color: #d97706;
+  background: linear-gradient(90deg, rgba(255, 247, 237, 0.92), rgba(254, 243, 199, 0.88));
+  box-shadow: 0 8px 18px rgba(217, 119, 6, 0.14);
+}
+
+.crop-input-section-title.section-soil::before {
+  background: #d97706;
+  box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.2);
+}
+
+.crop-input-section-title.section-farm {
+  color: #1d4ed8;
+  border-color: rgba(37, 99, 235, 0.3);
+  border-left-color: #2563eb;
+  background: linear-gradient(90deg, rgba(239, 246, 255, 0.94), rgba(224, 242, 254, 0.88));
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.14);
+}
+
+.crop-input-section-title.section-farm::before {
+  background: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
+.crop-input-section-title.section-market {
+  color: #065f46;
+  border-color: rgba(5, 150, 105, 0.3);
+  border-left-color: #059669;
+  background: linear-gradient(90deg, rgba(236, 253, 245, 0.94), rgba(209, 250, 229, 0.88));
+  box-shadow: 0 8px 18px rgba(5, 150, 105, 0.14);
+}
+
+.crop-input-section-title.section-market::before {
+  background: #059669;
+  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.2);
+}
+
+.crop-input-grid + .crop-input-section-title {
+  margin-top: 14px;
 }
 
 .crop-input-grid {
