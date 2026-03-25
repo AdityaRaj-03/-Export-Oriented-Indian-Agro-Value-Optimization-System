@@ -20,9 +20,9 @@
   padding: 90px 40px 70px;
   overflow: hidden;
   background:
-    radial-gradient(1400px 420px at 90% -20%, rgba(30, 64, 44, 0.14), transparent 68%),
-    radial-gradient(1000px 380px at -10% 0%, rgba(22, 163, 74, 0.16), transparent 65%),
-    linear-gradient(180deg, #eff9f2 0%, #e8f5eb 100%);
+    radial-gradient(1400px 420px at 90% -20%, rgba(30, 64, 44, 0.04), transparent 68%),
+    radial-gradient(1000px 380px at -10% 0%, rgba(22, 163, 74, 0.05), transparent 65%),
+    linear-gradient(180deg, #f8fbf9 0%, #f3f8f5 100%);
   border-bottom: 1px solid rgba(22, 101, 52, 0.08);
 }
 
@@ -720,7 +720,7 @@ form button:active {
   background:
     radial-gradient(circle at 14% 24%, rgba(255, 255, 255, 0.75), transparent 36%),
     radial-gradient(circle at 84% 14%, rgba(255, 255, 255, 0.58), transparent 40%),
-    radial-gradient(circle at 62% 84%, rgba(16, 185, 129, 0.18), transparent 48%),
+    radial-gradient(circle at 62% 84%, rgba(59, 130, 246, 0.16), transparent 48%),
     linear-gradient(110deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 48%);
   pointer-events: none;
   animation: aboutHeroGlow 12s ease-in-out infinite;
@@ -731,8 +731,8 @@ form button:active {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(480px 220px at 20% 72%, rgba(22, 163, 74, 0.2), transparent 72%),
-    radial-gradient(560px 240px at 82% 74%, rgba(5, 150, 105, 0.2), transparent 74%),
+    radial-gradient(480px 220px at 20% 72%, rgba(56, 189, 248, 0.18), transparent 72%),
+    radial-gradient(560px 240px at 82% 74%, rgba(37, 99, 235, 0.16), transparent 74%),
     linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0));
   opacity: 0.9;
   pointer-events: none;
@@ -855,9 +855,10 @@ form button:active {
 /* How To Hero */
 .howto-hero {
   background:
-    radial-gradient(1400px 420px at 90% -20%, rgba(30, 64, 44, 0.14), transparent 68%),
-    radial-gradient(1000px 380px at -10% 0%, rgba(22, 163, 74, 0.16), transparent 65%),
-    linear-gradient(180deg, #eff9f2 0%, #e8f5eb 100%);
+    radial-gradient(1200px 560px at 92% -15%, rgba(37, 99, 235, 0.24), transparent 67%),
+    radial-gradient(920px 460px at -8% 12%, rgba(14, 116, 144, 0.22), transparent 66%),
+    radial-gradient(780px 320px at 52% 110%, rgba(191, 219, 254, 0.48), transparent 74%),
+    linear-gradient(138deg, #f2f8ff 0%, #e1effa 44%, #d4e6f6 100%);
   padding: 20px 40px 60px;
   position: relative;
   overflow: hidden;
@@ -2073,9 +2074,10 @@ form button:active {
 
 .crop-hero {
   background:
-    radial-gradient(1400px 420px at 90% -20%, rgba(30, 64, 44, 0.14), transparent 68%),
-    radial-gradient(1000px 380px at -10% 0%, rgba(22, 163, 74, 0.16), transparent 65%),
-    linear-gradient(180deg, #eff9f2 0%, #e8f5eb 100%);
+    radial-gradient(1200px 560px at 92% -15%, rgba(37, 99, 235, 0.24), transparent 67%),
+    radial-gradient(920px 460px at -8% 12%, rgba(14, 116, 144, 0.22), transparent 66%),
+    radial-gradient(780px 320px at 52% 110%, rgba(191, 219, 254, 0.48), transparent 74%),
+    linear-gradient(138deg, #f2f8ff 0%, #e1effa 44%, #d4e6f6 100%);
   padding: 80px 40px 100px;
   position: relative;
   overflow: hidden;
@@ -3840,9 +3842,10 @@ form button:active {
 /* ========== Enhanced FAQ Hero ========== */
 .faq-hero-enhanced {
   background:
-    radial-gradient(1400px 420px at 90% -20%, rgba(30, 64, 44, 0.14), transparent 68%),
-    radial-gradient(1000px 380px at -10% 0%, rgba(22, 163, 74, 0.16), transparent 65%),
-    linear-gradient(180deg, #eff9f2 0%, #e8f5eb 100%);
+    radial-gradient(1200px 560px at 92% -15%, rgba(37, 99, 235, 0.24), transparent 67%),
+    radial-gradient(920px 460px at -8% 12%, rgba(14, 116, 144, 0.22), transparent 66%),
+    radial-gradient(780px 320px at 52% 110%, rgba(191, 219, 254, 0.48), transparent 74%),
+    linear-gradient(138deg, #f2f8ff 0%, #e1effa 44%, #d4e6f6 100%);
   padding: 80px 40px 200px;
   margin: -60px -40px 0;
   position: relative;
@@ -5510,10 +5513,10 @@ form button:active {
     position: relative;
     padding: 36px 0 32px;
     background:
-      radial-gradient(1200px 560px at 92% -15%, rgba(5, 150, 105, 0.34), transparent 67%),
-      radial-gradient(920px 460px at -8% 12%, rgba(16, 185, 129, 0.28), transparent 66%),
-      radial-gradient(780px 320px at 52% 110%, rgba(187, 247, 208, 0.5), transparent 74%),
-      linear-gradient(138deg, #ecfbf2 0%, #daf3e5 44%, #c4e9d7 100%);
+      radial-gradient(1200px 560px at 92% -15%, rgba(37, 99, 235, 0.24), transparent 67%),
+      radial-gradient(920px 460px at -8% 12%, rgba(14, 116, 144, 0.22), transparent 66%),
+      radial-gradient(780px 320px at 52% 110%, rgba(191, 219, 254, 0.48), transparent 74%),
+      linear-gradient(138deg, #f2f8ff 0%, #e1effa 44%, #d4e6f6 100%);
     border-bottom: 1px solid rgba(22, 101, 52, 0.08);
     overflow: hidden;
   }
@@ -5525,7 +5528,7 @@ form button:active {
     background:
       radial-gradient(circle at 14% 24%, rgba(255, 255, 255, 0.75), transparent 36%),
       radial-gradient(circle at 84% 14%, rgba(255, 255, 255, 0.58), transparent 40%),
-      radial-gradient(circle at 62% 84%, rgba(16, 185, 129, 0.18), transparent 48%),
+      radial-gradient(circle at 62% 84%, rgba(59, 130, 246, 0.16), transparent 48%),
       linear-gradient(110deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 48%);
     pointer-events: none;
     animation: aboutHeroGlow 12s ease-in-out infinite;
@@ -5536,8 +5539,8 @@ form button:active {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(480px 220px at 20% 72%, rgba(22, 163, 74, 0.2), transparent 72%),
-      radial-gradient(560px 240px at 82% 74%, rgba(5, 150, 105, 0.2), transparent 74%),
+      radial-gradient(480px 220px at 20% 72%, rgba(56, 189, 248, 0.18), transparent 72%),
+      radial-gradient(560px 240px at 82% 74%, rgba(37, 99, 235, 0.16), transparent 74%),
       linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0));
     opacity: 0.9;
     pointer-events: none;
@@ -5802,16 +5805,15 @@ form button:active {
 
   /* ============== HERO BACKGROUND CLEANUP ============== */
   /* Keep hero content/objects, remove mountain-style layers and boxy card fills */
-  .landing-hero,
   .howto-hero,
   .crop-hero,
   .faq-hero-enhanced,
   .faq-hero {
     background:
-      radial-gradient(1200px 560px at 92% -15%, rgba(5, 150, 105, 0.34), transparent 67%),
-      radial-gradient(920px 460px at -8% 12%, rgba(16, 185, 129, 0.28), transparent 66%),
-      radial-gradient(780px 320px at 52% 110%, rgba(187, 247, 208, 0.5), transparent 74%),
-      linear-gradient(138deg, #ecfbf2 0%, #daf3e5 44%, #c4e9d7 100%);
+      radial-gradient(1200px 560px at 92% -15%, rgba(37, 99, 235, 0.24), transparent 67%),
+      radial-gradient(920px 460px at -8% 12%, rgba(14, 116, 144, 0.22), transparent 66%),
+      radial-gradient(780px 320px at 52% 110%, rgba(191, 219, 254, 0.48), transparent 74%),
+      linear-gradient(138deg, #f2f8ff 0%, #e1effa 44%, #d4e6f6 100%);
     border-bottom: 1px solid rgba(22, 101, 52, 0.08);
   }
 
