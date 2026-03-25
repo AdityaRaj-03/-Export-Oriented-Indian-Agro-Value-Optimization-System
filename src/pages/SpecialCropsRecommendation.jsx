@@ -78,40 +78,44 @@ function SpecialCropsRecommendation() {
         <div className="hero-grid-pattern"></div>
         <div className="special-hero-inner">
           <div className="special-hero-copy">
-            <span className="special-badge">Profit-first crop planning</span>
-            <h1>Special Crops Recommendation</h1>
+            <span className="special-badge">Special Intelligence Layer</span>
+            <p className="special-hero-kicker">Export-Oriented Strategy</p>
+            <h1>
+              Special Crops
+              <span className="special-hero-title-highlight"> for Higher Global Margins</span>
+            </h1>
             <p className="special-hero-lead">
-              Find export-oriented, high-value crops that fit your farm conditions and maximize
-              income potential.
+              This page is built for premium planning: it prioritizes crops that match your farm
+              profile and can produce stronger export-side returns.
             </p>
-            <div className="special-hero-points">
-              <span>Export premium focused ranking</span>
-              <span>Farm-fit + profit score combined</span>
-              <span>Built for strategic crop planning</span>
-            </div>
             <div className="special-hero-cta-row">
               <a href="#special-form">Start Recommendation</a>
-              <small>Use current soil data for best accuracy</small>
+              <small>Use latest NPK and rainfall values for precise output</small>
             </div>
           </div>
-          <div className="special-hero-metrics">
-            <div className="hero-metric-card">
-              <strong>Top 3</strong>
-              <span>Priority recommendations</span>
+          <aside className="special-hero-proof">
+            <p className="proof-label">What makes this page special</p>
+            <h3>Built for export-focused crop decisions, not generic recommendations.</h3>
+            <div className="proof-stats">
+              <div>
+                <strong>Top 3</strong>
+                <span>Action-ready shortlist</span>
+              </div>
+              <div>
+                <strong>2 Signals</strong>
+                <span>Farm fit + margin logic</span>
+              </div>
+              <div>
+                <strong>Clear Why</strong>
+                <span>Reason shown for #1 crop</span>
+              </div>
             </div>
-            <div className="hero-metric-card">
-              <strong>Export vs India</strong>
-              <span>Profit margin comparison</span>
+            <div className="proof-points">
+              <span>Export premium focused ranking</span>
+              <span>Suitability + profit scoring engine</span>
+              <span>Transparent recommendation logic</span>
             </div>
-            <div className="hero-metric-card">
-              <strong>Rule-based</strong>
-              <span>Fast and practical output</span>
-            </div>
-            <div className="hero-metric-card hero-metric-featured">
-              <strong>Decision Dashboard</strong>
-              <span>Output explains why a crop ranks first</span>
-            </div>
-          </div>
+          </aside>
         </div>
       </section>
 
