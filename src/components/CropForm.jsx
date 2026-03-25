@@ -1,6 +1,15 @@
 import { useState } from "react";
 
 function CropForm({ onPredict, onReset, isPredicting }) {
+  const districtsByState = {
+    Punjab: ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda"],
+    Haryana: ["Karnal", "Hisar", "Rohtak", "Panipat", "Ambala"],
+    "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi", "Prayagraj"],
+    Maharashtra: ["Pune", "Nashik", "Nagpur", "Aurangabad", "Kolhapur"],
+    Karnataka: ["Bengaluru", "Mysuru", "Belagavi", "Hubballi", "Davanagere"],
+    "Tamil Nadu": ["Coimbatore", "Chennai", "Madurai", "Salem", "Tiruchirappalli"]
+  };
+
   const [nitrogen, setNitrogen] = useState("");
   const [soilPh, setSoilPh] = useState("");
   const [temperature, setTemperature] = useState("");
@@ -8,6 +17,7 @@ function CropForm({ onPredict, onReset, isPredicting }) {
 
   const [stateName, setStateName] = useState("");
   const [district, setDistrict] = useState("");
+  const districtOptions = stateName ? districtsByState[stateName] || [] : [];
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -122,7 +132,14 @@ function CropForm({ onPredict, onReset, isPredicting }) {
         <div className="crop-input-grid simple-grid">
           <label className="simple-field field-wide">
             <span className="simple-label">State <em>*</em></span>
-            <select value={stateName} onChange={(e) => setStateName(e.target.value)} required>
+            <select
+              value={stateName}
+              onChange={(e) => {
+                setStateName(e.target.value);
+                setDistrict("");
+              }}
+              required
+            >
               <option value="">Select your state</option>
               <option>Punjab</option>
               <option>Haryana</option>
@@ -136,14 +153,20 @@ function CropForm({ onPredict, onReset, isPredicting }) {
 
           <label className="simple-field field-wide">
             <span className="simple-label">District <em>*</em></span>
-            <input
-              type="text"
-              placeholder="Example: Coimbatore"
+            <select
               value={district}
               onChange={(e) => setDistrict(e.target.value)}
               required
-            />
-            <small className="simple-help">District-level location</small>
+              disabled={!stateName}
+            >
+              <option value="">{stateName ? "Select your district" : "Select state first"}</option>
+              {districtOptions.map((districtName) => (
+                <option key={districtName} value={districtName}>
+                  {districtName}
+                </option>
+              ))}
+            </select>
+            <small className="simple-help">District options depend on selected state</small>
           </label>
         </div>
       </section>
