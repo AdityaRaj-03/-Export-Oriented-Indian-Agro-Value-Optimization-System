@@ -1,25 +1,33 @@
 function Result({ result }) {
-  const exportScoreMap = { High: 90, Medium: 65, Low: 40 };
-  const riskSafetyMap = { Low: 90, Medium: 65, High: 40 };
-  const exportToneMap = { High: "positive", Medium: "balanced", Low: "caution" };
-  const riskToneMap = { Low: "positive", Medium: "balanced", High: "caution" };
+  // Convert numeric scores to tone/level for badges
+  const getExportLevel = (score) => {
+    if (score >= 75) return "High";
+    if (score >= 50) return "Medium";
+    return "Low";
+  };
+  
+  const getRiskLevel = (score) => {
+    if (score >= 75) return "Low";
+    if (score >= 50) return "Medium";
+    return "High";
+  };
 
-  const exportScore = result ? exportScoreMap[result.export] ?? 50 : 0;
-  const riskSafetyScore = result ? riskSafetyMap[result.risk] ?? 50 : 0;
-  const exportTone = result ? exportToneMap[result.export] ?? "balanced" : "balanced";
-  const riskTone = result ? riskToneMap[result.risk] ?? "balanced" : "balanced";
+  const exportLevel = result ? getExportLevel(result.export) : "Medium";
+  const riskLevel = result ? getRiskLevel(result.risk) : "Medium";
+  const exportScore = result ? Math.round(result.export) : 0;
+  const riskSafetyScore = result ? Math.round(result.risk) : 0;
 
   if (!result) {
     return (
       <div className="result crop-result-card result-empty">
         <h2>📊 Prediction Panel</h2>
         <p className="result-empty-text">
-          Submit the form to see your recommended crop, export potential, and risk profile here.
+          Submit the form to see your recommended crop with yield, pricing, and profit analysis.
         </p>
         <div className="result-empty-chips">
           <span>Crop Fit</span>
-          <span>Export Score</span>
-          <span>Risk Snapshot</span>
+          <span>Yield Forecast</span>
+          <span>Market Analysis</span>
         </div>
       </div>
     );
@@ -27,64 +35,131 @@ function Result({ result }) {
 
   return (
     <div className="result crop-result-card result-filled">
-      <div className="result-head">
-        <h2>✅ Recommendation Result</h2>
-        <p>Based on your selected farm conditions</p>
-      </div>
-
-      <div className="result-hero">
-        <span className="result-hero-label">Best Match Crop</span>
-        <h3>{result.crop}</h3>
-        <div className="result-hero-tags">
-          <span className={`result-status ${exportTone}`}>Export: {result.export}</span>
-          <span className={`result-status ${riskTone}`}>Risk: {result.risk}</span>
+      {/* Hero Card - Crop Recommendation */}
+      <div className="result-crop-hero">
+        <div className="hero-accent"></div>
+        <div className="hero-content">
+          <span className="hero-label">✅ Recommended Crop</span>
+          <h2 className="hero-crop-name">{result.crop}</h2>
+          <div className="hero-badges">
+            <span className={`badge badge-export badge-${exportLevel.toLowerCase()}`}>
+              💼 Export: {exportLevel}
+            </span>
+            <span className={`badge badge-risk badge-${riskLevel.toLowerCase()}`}>
+              ⚠️ Risk: {riskLevel}
+            </span>
+          </div>
         </div>
       </div>
 
-      <div className="result-score-grid">
-        <div className="score-card export">
-          <div className="score-label-row">
-            <strong>Export Potential</strong>
-            <span>{exportScore}%</span>
+      {/* Crop Details Grid */}
+      <div className="result-details-section">
+        <h3 className="section-title">📋 Crop Details</h3>
+        <div className="details-grid">
+          <div className="detail-card">
+            <div className="detail-label">Predicted Yield</div>
+            <div className="detail-value">{result.yield.toFixed(2)}</div>
+            <div className="detail-unit">tons</div>
           </div>
-          <div className="score-track">
-            <div className="score-fill" style={{ "--score": `${exportScore}%` }}></div>
+          <div className="detail-card">
+            <div className="detail-label">Market Price</div>
+            <div className="detail-value">₹{result.marketPrice}</div>
+            <div className="detail-unit">per unit</div>
           </div>
-          <p className="score-note">Indicates expected market demand and export viability.</p>
+          <div className="detail-card">
+            <div className="detail-label">Export Price</div>
+            <div className="detail-value">₹{result.exportPrice}</div>
+            <div className="detail-unit">premium rate</div>
+          </div>
+          <div className="detail-card">
+            <div className="detail-label">Best Export To</div>
+            <div className="detail-value" style={{ fontSize: "0.95rem" }}>{result.bestCountry}</div>
+            <div className="detail-unit">international</div>
+          </div>
         </div>
+      </div>
 
-        <div className="score-card risk">
-          <div className="score-label-row">
-            <strong>Risk Safety Index</strong>
-            <span>{riskSafetyScore}%</span>
+      {/* Market Analysis Section */}
+      <div className="result-market-section">
+        <h3 className="section-title">📊 Market Analysis</h3>
+        <div className="market-grid">
+          <div className="market-card local">
+            <div className="market-header">
+              <span className="market-icon">🏪</span>
+              <span className="market-title">Local Market</span>
+            </div>
+            <div className="market-row">
+              <span>Revenue</span>
+              <strong className="positive">₹{result.localMarketRevenue.toLocaleString()}</strong>
+            </div>
+            <div className="market-row">
+              <span>Loss</span>
+              <strong className="negative">-₹{result.localMarketLoss.toLocaleString()}</strong>
+            </div>
+            <div className="market-net">
+              <span>Net Profit</span>
+              <strong className={result.localProfit > 0 ? "profit-positive" : "profit-negative"}>
+                ₹{result.localProfit.toLocaleString()}
+              </strong>
+            </div>
           </div>
-          <div className="score-track">
-            <div className="score-fill" style={{ "--score": `${riskSafetyScore}%` }}></div>
+
+          <div className="market-card export">
+            <div className="market-header">
+              <span className="market-icon">🌍</span>
+              <span className="market-title">Export Market</span>
+            </div>
+            <div className="market-row">
+              <span>Revenue</span>
+              <strong className="positive">₹{result.exportMarketRevenue.toLocaleString()}</strong>
+            </div>
+            <div className="market-row">
+              <span>Loss</span>
+              <strong className="negative">-₹{result.exportMarketLoss.toLocaleString()}</strong>
+            </div>
+            <div className="market-net">
+              <span>Net Profit</span>
+              <strong className={result.exportProfit > 0 ? "profit-positive" : "profit-negative"}>
+                ₹{result.exportProfit.toLocaleString()}
+              </strong>
+            </div>
           </div>
-          <p className="score-note">Higher score means more stable and lower operational risk.</p>
         </div>
       </div>
 
-      <div className="result-row">
-        <strong>🌾 Recommended Crop</strong>
-        <span className="result-pill success">{result.crop}</span>
-      </div>
-      <div className="result-row">
-        <strong>📈 Export Potential</strong>
-        <span className="result-pill info">{result.export}</span>
-      </div>
-      <div className="result-row">
-        <strong>⚠️ Risk Level</strong>
-        <span className="result-pill warning">{result.risk}</span>
+      {/* Recommendation Box */}
+      <div className="result-recommendation-box">
+        <div className="recommendation-icon">🎯</div>
+        <div className="recommendation-content">
+          <span className="recommendation-label">Better Option</span>
+          <div className="recommendation-value">{result.betterOption}</div>
+        </div>
       </div>
 
-      <div className="result-insights">
-        <h4>Strategic Suggestions</h4>
-        <ul>
-          <li>Plan sowing around your selected season window to maximize output consistency.</li>
-          <li>Track local mandi/export trends weekly to adjust harvest timing for better price realization.</li>
-          <li>Use soil and weather monitoring to keep risk near or below the current level.</li>
-        </ul>
+      {/* Score Cards */}
+      <div className="result-scores-section">
+        <h3 className="section-title">📈 Performance Scores</h3>
+        <div className="scores-grid">
+          <div className="score-card export-score">
+            <div className="score-label-row">
+              <strong>Export Potential</strong>
+              <span>{exportScore}%</span>
+            </div>
+            <div className="score-track">
+              <div className="score-fill" style={{ "--score": `${exportScore}%` }}></div>
+            </div>
+          </div>
+
+          <div className="score-card risk-score">
+            <div className="score-label-row">
+              <strong>Risk Safety Index</strong>
+              <span>{riskSafetyScore}%</span>
+            </div>
+            <div className="score-track">
+              <div className="score-fill" style={{ "--score": `${riskSafetyScore}%` }}></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

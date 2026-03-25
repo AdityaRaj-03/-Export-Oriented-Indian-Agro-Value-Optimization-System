@@ -30,7 +30,7 @@ function HomePage() {
 
   return (
     <div className="page landing-page">
-      <section className="landing-hero premium-hero-base">
+      <section className="landing-hero">
         <div className="landing-hero-grid-pattern"></div>
         <div className="landing-hero-shell">
           <div className="landing-hero-content">
