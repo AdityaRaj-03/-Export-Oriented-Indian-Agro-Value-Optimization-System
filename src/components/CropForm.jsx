@@ -2,12 +2,34 @@ import { useState } from "react";
 
 function CropForm({ onPredict, onReset, isPredicting }) {
   const districtsByState = {
-    Punjab: ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda"],
+    "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Kurnool", "Nellore"],
+    "Arunachal Pradesh": ["Itanagar", "Tawang", "Pasighat", "Ziro", "Bomdila"],
+    Assam: ["Guwahati", "Dibrugarh", "Silchar", "Jorhat", "Tezpur"],
+    Bihar: ["Patna", "Gaya", "Muzaffarpur", "Bhagalpur", "Purnia"],
+    Chhattisgarh: ["Raipur", "Bilaspur", "Durg", "Korba", "Rajnandgaon"],
+    Goa: ["North Goa", "South Goa", "Panaji", "Margao", "Mapusa"],
+    Gujarat: ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar"],
     Haryana: ["Karnal", "Hisar", "Rohtak", "Panipat", "Ambala"],
-    "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi", "Prayagraj"],
+    "Himachal Pradesh": ["Shimla", "Mandi", "Kangra", "Solan", "Kullu"],
+    Jharkhand: ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Hazaribagh"],
     Maharashtra: ["Pune", "Nashik", "Nagpur", "Aurangabad", "Kolhapur"],
     Karnataka: ["Bengaluru", "Mysuru", "Belagavi", "Hubballi", "Davanagere"],
-    "Tamil Nadu": ["Coimbatore", "Chennai", "Madurai", "Salem", "Tiruchirappalli"]
+    Kerala: ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Kannur"],
+    "Madhya Pradesh": ["Bhopal", "Indore", "Jabalpur", "Gwalior", "Ujjain"],
+    Manipur: ["Imphal", "Churachandpur", "Thoubal", "Bishnupur", "Ukhrul"],
+    Meghalaya: ["Shillong", "Tura", "Jowai", "Nongpoh", "Baghmara"],
+    Mizoram: ["Aizawl", "Lunglei", "Champhai", "Kolasib", "Serchhip"],
+    Nagaland: ["Kohima", "Dimapur", "Mokokchung", "Tuensang", "Wokha"],
+    Odisha: ["Bhubaneswar", "Cuttack", "Rourkela", "Sambalpur", "Puri"],
+    Punjab: ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda"],
+    Rajasthan: ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Bikaner"],
+    Sikkim: ["Gangtok", "Namchi", "Gyalshing", "Mangan", "Pakyong"],
+    "Tamil Nadu": ["Coimbatore", "Chennai", "Madurai", "Salem", "Tiruchirappalli"],
+    Telangana: ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar", "Khammam"],
+    Tripura: ["Agartala", "Udaipur", "Dharmanagar", "Kailashahar", "Ambassa"],
+    "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi", "Prayagraj"],
+    Uttarakhand: ["Dehradun", "Haridwar", "Nainital", "Haldwani", "Rudrapur"],
+    "West Bengal": ["Kolkata", "Howrah", "Siliguri", "Durgapur", "Asansol"]
   };
 
   const [nitrogen, setNitrogen] = useState("");
@@ -17,6 +39,7 @@ function CropForm({ onPredict, onReset, isPredicting }) {
 
   const [stateName, setStateName] = useState("");
   const [district, setDistrict] = useState("");
+  const stateOptions = Object.keys(districtsByState);
   const districtOptions = stateName ? districtsByState[stateName] || [] : [];
 
   function handleSubmit(e) {
@@ -141,12 +164,11 @@ function CropForm({ onPredict, onReset, isPredicting }) {
               required
             >
               <option value="">Select your state</option>
-              <option>Punjab</option>
-              <option>Haryana</option>
-              <option>Uttar Pradesh</option>
-              <option>Maharashtra</option>
-              <option>Karnataka</option>
-              <option>Tamil Nadu</option>
+              {stateOptions.map((stateOption) => (
+                <option key={stateOption} value={stateOption}>
+                  {stateOption}
+                </option>
+              ))}
             </select>
             <small className="simple-help">State where your farm is located</small>
           </label>
