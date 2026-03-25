@@ -42,6 +42,7 @@ function SpecialCropsRecommendation() {
 
   const bestCrop = result?.topRecommendations?.[0] ?? null;
   const secondCrop = result?.topRecommendations?.[1] ?? null;
+  const isGeneratedTheme = isLoading || Boolean(result);
 
   const marginLead = bestCrop && secondCrop
     ? bestCrop.estimatedProfitMargin - secondCrop.estimatedProfitMargin
@@ -79,31 +80,44 @@ function SpecialCropsRecommendation() {
           <div className="special-hero-copy">
             <span className="special-badge">Profit-first crop planning</span>
             <h1>Special Crops Recommendation</h1>
-            <p>
+            <p className="special-hero-lead">
               Find export-oriented, high-value crops that fit your farm conditions and maximize
               income potential.
             </p>
+            <div className="special-hero-points">
+              <span>Export premium focused ranking</span>
+              <span>Farm-fit + profit score combined</span>
+              <span>Built for strategic crop planning</span>
+            </div>
+            <div className="special-hero-cta-row">
+              <a href="#special-form">Start Recommendation</a>
+              <small>Use current soil data for best accuracy</small>
+            </div>
           </div>
           <div className="special-hero-metrics">
-            <div>
+            <div className="hero-metric-card">
               <strong>Top 3</strong>
               <span>Priority recommendations</span>
             </div>
-            <div>
+            <div className="hero-metric-card">
               <strong>Export vs India</strong>
               <span>Profit margin comparison</span>
             </div>
-            <div>
+            <div className="hero-metric-card">
               <strong>Rule-based</strong>
               <span>Fast and practical output</span>
+            </div>
+            <div className="hero-metric-card hero-metric-featured">
+              <strong>Decision Dashboard</strong>
+              <span>Output explains why a crop ranks first</span>
             </div>
           </div>
         </div>
       </section>
 
       <section className="special-content">
-        <div className="special-layout">
-          <form className={`special-form ${isLoading ? "is-loading" : ""}`} onSubmit={handleSubmit}>
+        <div className={`special-layout ${isGeneratedTheme ? "is-generated" : ""}`}>
+          <form id="special-form" className={`special-form ${isLoading ? "is-loading" : ""}`} onSubmit={handleSubmit}>
             <div className="special-form-head">
               <span className="special-form-eyebrow">Export Strategy Input</span>
               <h2>Input Details</h2>
