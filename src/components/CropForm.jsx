@@ -2,17 +2,12 @@ import { useState } from "react";
 
 function CropForm({ onPredict, onReset, isPredicting }) {
   const [nitrogen, setNitrogen] = useState("");
-  const [phosphorus, setPhosphorus] = useState("");
-  const [potassium, setPotassium] = useState("");
+  const [soilPh, setSoilPh] = useState("");
+  const [temperature, setTemperature] = useState("");
   const [rainfall, setRainfall] = useState("");
 
   const [stateName, setStateName] = useState("");
-  const [season, setSeason] = useState("");
-  const [areaOfLand, setAreaOfLand] = useState("");
-
   const [district, setDistrict] = useState("");
-  const [market, setMarket] = useState("");
-  const [arrivalDate, setArrivalDate] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,32 +15,23 @@ function CropForm({ onPredict, onReset, isPredicting }) {
     if (isPredicting) return;
 
     onPredict({
-      nitrogen,
-      phosphorus,
-      potassium,
-      rainfall,
+      N: nitrogen,
+      Soil_pH: soilPh,
+      Temperature: temperature,
+      Rainfall: rainfall,
       state: stateName,
-      season,
-      areaOfLand,
-      district,
-      market,
-      arrivalDate
+      district
     });
   }
 
   function handleReset() {
     setNitrogen("");
-    setPhosphorus("");
-    setPotassium("");
+    setSoilPh("");
+    setTemperature("");
     setRainfall("");
 
     setStateName("");
-    setSeason("");
-    setAreaOfLand("");
-
     setDistrict("");
-    setMarket("");
-    setArrivalDate("");
 
     if (onReset) onReset();
   }
@@ -54,11 +40,10 @@ function CropForm({ onPredict, onReset, isPredicting }) {
     <form className={`crop-smart-form clean-form ${isPredicting ? "is-loading" : ""}`} onSubmit={handleSubmit}>
       <div className="crop-form-header">
         <h2>Crop Recommendation Form</h2>
-        <p>Complete these three sections for a faster and more accurate recommendation.</p>
+        <p>Enter only the required soil, weather, and location values.</p>
         <div className="crop-form-badges">
           <span>1. Soil & Climate</span>
-          <span>2. Farm Details</span>
-          <span>3. Market Window</span>
+          <span>2. Location</span>
         </div>
       </div>
 
@@ -83,31 +68,34 @@ function CropForm({ onPredict, onReset, isPredicting }) {
           </label>
 
           <label className="simple-field">
-            <span className="simple-label">Phosphorus (P) <em>*</em></span>
+            <span className="simple-label">Soil pH <em>*</em></span>
             <input
               type="number"
               min="0"
-              inputMode="numeric"
-              placeholder="Example: 40"
-              value={phosphorus}
-              onChange={(e) => setPhosphorus(e.target.value)}
+              max="14"
+              step="0.1"
+              inputMode="decimal"
+              placeholder="Example: 6.5"
+              value={soilPh}
+              onChange={(e) => setSoilPh(e.target.value)}
               required
             />
-            <small className="simple-help">Soil phosphorus value</small>
+            <small className="simple-help">pH level of your soil</small>
           </label>
 
           <label className="simple-field">
-            <span className="simple-label">Potassium (K) <em>*</em></span>
+            <span className="simple-label">Temperature (°C) <em>*</em></span>
             <input
               type="number"
-              min="0"
+              min="-10"
+              max="60"
               inputMode="numeric"
-              placeholder="Example: 45"
-              value={potassium}
-              onChange={(e) => setPotassium(e.target.value)}
+              placeholder="Example: 25"
+              value={temperature}
+              onChange={(e) => setTemperature(e.target.value)}
               required
             />
-            <small className="simple-help">Soil potassium value</small>
+            <small className="simple-help">Current average temperature</small>
           </label>
 
           <label className="simple-field field-wide">
@@ -116,7 +104,7 @@ function CropForm({ onPredict, onReset, isPredicting }) {
               type="number"
               min="0"
               inputMode="numeric"
-              placeholder="Example: 850"
+              placeholder="Example: 1000"
               value={rainfall}
               onChange={(e) => setRainfall(e.target.value)}
               required
@@ -129,7 +117,7 @@ function CropForm({ onPredict, onReset, isPredicting }) {
       <section className="crop-form-section">
         <div className="crop-input-section-title section-farm">
           <span className="section-step">Step 2</span>
-          <span>Farm Info</span>
+          <span>Location</span>
         </div>
         <div className="crop-input-grid simple-grid">
           <label className="simple-field field-wide">
@@ -143,76 +131,19 @@ function CropForm({ onPredict, onReset, isPredicting }) {
               <option>Karnataka</option>
               <option>Tamil Nadu</option>
             </select>
-            <small className="simple-help">Your farm location</small>
+            <small className="simple-help">State where your farm is located</small>
           </label>
 
-          <label className="simple-field">
-            <span className="simple-label">Season <em>*</em></span>
-            <select value={season} onChange={(e) => setSeason(e.target.value)} required>
-              <option value="">Select season</option>
-              <option>Kharif</option>
-              <option>Rabi</option>
-              <option>Zaid</option>
-            </select>
-            <small className="simple-help">Crop cycle period</small>
-          </label>
-
-          <label className="simple-field">
-            <span className="simple-label">Area of Land (acres) <em>*</em></span>
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              inputMode="decimal"
-              placeholder="Example: 2.5"
-              value={areaOfLand}
-              onChange={(e) => setAreaOfLand(e.target.value)}
-              required
-            />
-            <small className="simple-help">Total cultivable area</small>
-          </label>
-        </div>
-      </section>
-
-      <section className="crop-form-section">
-        <div className="crop-input-section-title section-market">
-          <span className="section-step">Step 3</span>
-          <span>Market Info</span>
-        </div>
-        <div className="crop-input-grid simple-grid">
-          <label className="simple-field">
+          <label className="simple-field field-wide">
             <span className="simple-label">District <em>*</em></span>
             <input
               type="text"
-              placeholder="Example: Ludhiana"
+              placeholder="Example: Coimbatore"
               value={district}
               onChange={(e) => setDistrict(e.target.value)}
               required
             />
-            <small className="simple-help">District-level market zone</small>
-          </label>
-
-          <label className="simple-field">
-            <span className="simple-label">Market <em>*</em></span>
-            <input
-              type="text"
-              placeholder="Example: Khanna Mandi"
-              value={market}
-              onChange={(e) => setMarket(e.target.value)}
-              required
-            />
-            <small className="simple-help">APMC / local market name</small>
-          </label>
-
-          <label className="simple-field field-wide">
-            <span className="simple-label">Arrival Date <em>*</em></span>
-            <input
-              type="date"
-              value={arrivalDate}
-              onChange={(e) => setArrivalDate(e.target.value)}
-              required
-            />
-            <small className="simple-help">Expected produce arrival date</small>
+            <small className="simple-help">District-level location</small>
           </label>
         </div>
       </section>
