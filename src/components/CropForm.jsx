@@ -1,46 +1,18 @@
 import { useState } from "react";
+import { getAllStates, getDistricts } from "india-state-district";
+
+const allIndiaStates = getAllStates();
 
 function CropForm({ onPredict, onReset, isPredicting }) {
-  const districtsByState = {
-    "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Kurnool", "Nellore"],
-    "Arunachal Pradesh": ["Itanagar", "Tawang", "Pasighat", "Ziro", "Bomdila"],
-    Assam: ["Guwahati", "Dibrugarh", "Silchar", "Jorhat", "Tezpur"],
-    Bihar: ["Patna", "Gaya", "Muzaffarpur", "Bhagalpur", "Purnia"],
-    Chhattisgarh: ["Raipur", "Bilaspur", "Durg", "Korba", "Rajnandgaon"],
-    Goa: ["North Goa", "South Goa", "Panaji", "Margao", "Mapusa"],
-    Gujarat: ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar"],
-    Haryana: ["Karnal", "Hisar", "Rohtak", "Panipat", "Ambala"],
-    "Himachal Pradesh": ["Shimla", "Mandi", "Kangra", "Solan", "Kullu"],
-    Jharkhand: ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Hazaribagh"],
-    Maharashtra: ["Pune", "Nashik", "Nagpur", "Aurangabad", "Kolhapur"],
-    Karnataka: ["Bengaluru", "Mysuru", "Belagavi", "Hubballi", "Davanagere"],
-    Kerala: ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Kannur"],
-    "Madhya Pradesh": ["Bhopal", "Indore", "Jabalpur", "Gwalior", "Ujjain"],
-    Manipur: ["Imphal", "Churachandpur", "Thoubal", "Bishnupur", "Ukhrul"],
-    Meghalaya: ["Shillong", "Tura", "Jowai", "Nongpoh", "Baghmara"],
-    Mizoram: ["Aizawl", "Lunglei", "Champhai", "Kolasib", "Serchhip"],
-    Nagaland: ["Kohima", "Dimapur", "Mokokchung", "Tuensang", "Wokha"],
-    Odisha: ["Bhubaneswar", "Cuttack", "Rourkela", "Sambalpur", "Puri"],
-    Punjab: ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda"],
-    Rajasthan: ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Bikaner"],
-    Sikkim: ["Gangtok", "Namchi", "Gyalshing", "Mangan", "Pakyong"],
-    "Tamil Nadu": ["Coimbatore", "Chennai", "Madurai", "Salem", "Tiruchirappalli"],
-    Telangana: ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar", "Khammam"],
-    Tripura: ["Agartala", "Udaipur", "Dharmanagar", "Kailashahar", "Ambassa"],
-    "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi", "Prayagraj"],
-    Uttarakhand: ["Dehradun", "Haridwar", "Nainital", "Haldwani", "Rudrapur"],
-    "West Bengal": ["Kolkata", "Howrah", "Siliguri", "Durgapur", "Asansol"]
-  };
-
   const [nitrogen, setNitrogen] = useState("");
   const [soilPh, setSoilPh] = useState("");
   const [temperature, setTemperature] = useState("");
   const [rainfall, setRainfall] = useState("");
 
-  const [stateName, setStateName] = useState("");
+  const [stateCode, setStateCode] = useState("");
   const [district, setDistrict] = useState("");
-  const stateOptions = Object.keys(districtsByState);
-  const districtOptions = stateName ? districtsByState[stateName] || [] : [];
+  const selectedStateName = allIndiaStates.find((state) => state.code === stateCode)?.name || "";
+  const districtOptions = stateCode ? getDistricts(stateCode) : [];
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -52,7 +24,7 @@ function CropForm({ onPredict, onReset, isPredicting }) {
       Soil_pH: soilPh,
       Temperature: temperature,
       Rainfall: rainfall,
-      state: stateName,
+      state: selectedStateName,
       district
     });
   }
@@ -63,7 +35,7 @@ function CropForm({ onPredict, onReset, isPredicting }) {
     setTemperature("");
     setRainfall("");
 
-    setStateName("");
+    setStateCode("");
     setDistrict("");
 
     if (onReset) onReset();
@@ -156,17 +128,17 @@ function CropForm({ onPredict, onReset, isPredicting }) {
           <label className="simple-field field-wide">
             <span className="simple-label">State <em>*</em></span>
             <select
-              value={stateName}
+              value={stateCode}
               onChange={(e) => {
-                setStateName(e.target.value);
+                setStateCode(e.target.value);
                 setDistrict("");
               }}
               required
             >
               <option value="">Select your state</option>
-              {stateOptions.map((stateOption) => (
-                <option key={stateOption} value={stateOption}>
-                  {stateOption}
+              {allIndiaStates.map((stateOption) => (
+                <option key={stateOption.code} value={stateOption.code}>
+                  {stateOption.name}
                 </option>
               ))}
             </select>
@@ -179,9 +151,9 @@ function CropForm({ onPredict, onReset, isPredicting }) {
               value={district}
               onChange={(e) => setDistrict(e.target.value)}
               required
-              disabled={!stateName}
+              disabled={!stateCode}
             >
-              <option value="">{stateName ? "Select your district" : "Select state first"}</option>
+              <option value="">{stateCode ? "Select your district" : "Select state first"}</option>
               {districtOptions.map((districtName) => (
                 <option key={districtName} value={districtName}>
                   {districtName}
