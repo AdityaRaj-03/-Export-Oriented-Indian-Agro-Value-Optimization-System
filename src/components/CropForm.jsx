@@ -11,6 +11,7 @@ function CropForm({ onPredict, onReset, isPredicting }) {
 
   const [stateCode, setStateCode] = useState("");
   const [district, setDistrict] = useState("");
+  const [customDistrict, setCustomDistrict] = useState("");
   const selectedStateName = allIndiaStates.find((state) => state.code === stateCode)?.name || "";
   const districtOptions = stateCode ? getDistricts(stateCode) : [];
 
@@ -25,7 +26,7 @@ function CropForm({ onPredict, onReset, isPredicting }) {
       Temperature: temperature,
       Rainfall: rainfall,
       state: selectedStateName,
-      district
+      district: district === "__other__" ? customDistrict.trim() : district
     });
   }
 
@@ -37,6 +38,7 @@ function CropForm({ onPredict, onReset, isPredicting }) {
 
     setStateCode("");
     setDistrict("");
+    setCustomDistrict("");
 
     if (onReset) onReset();
   }
@@ -132,6 +134,7 @@ function CropForm({ onPredict, onReset, isPredicting }) {
               onChange={(e) => {
                 setStateCode(e.target.value);
                 setDistrict("");
+                setCustomDistrict("");
               }}
               required
             >
@@ -159,9 +162,24 @@ function CropForm({ onPredict, onReset, isPredicting }) {
                   {districtName}
                 </option>
               ))}
+              <option value="__other__">Other (Enter manually)</option>
             </select>
             <small className="simple-help">District options depend on selected state</small>
           </label>
+
+          {district === "__other__" && (
+            <label className="simple-field field-wide">
+              <span className="simple-label">Enter District Name <em>*</em></span>
+              <input
+                type="text"
+                value={customDistrict}
+                onChange={(e) => setCustomDistrict(e.target.value)}
+                placeholder="Type your district name"
+                required
+              />
+              <small className="simple-help">Use this if your district is not listed</small>
+            </label>
+          )}
         </div>
       </section>
 
