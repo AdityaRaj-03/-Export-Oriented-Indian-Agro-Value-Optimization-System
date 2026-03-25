@@ -134,9 +134,14 @@ function CropRecommendation() {
         {/* Help Link */}
         <div className="crop-help">
           <p>Need help filling the form?</p>
-          <Link to="/howto" className="help-link">
-            <span>📖</span> View How to Use Guide
-          </Link>
+          <div className="crop-help-actions">
+            <Link to="/howto" className="help-link">
+              <span>📖</span> View How to Use Guide
+            </Link>
+            <Link to="/special-crops" className="help-link special-link">
+              <span>🌟</span> Try Special Crops Recommendation
+            </Link>
+          </div>
         </div>
       </div>
     </div>

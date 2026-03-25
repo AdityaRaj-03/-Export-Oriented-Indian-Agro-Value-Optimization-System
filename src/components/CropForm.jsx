@@ -51,210 +51,177 @@ function CropForm({ onPredict, onReset, isPredicting }) {
   }
 
   return (
-    <form className={`crop-smart-form ${isPredicting ? "is-loading" : ""}`} onSubmit={handleSubmit}>
+    <form className={`crop-smart-form clean-form ${isPredicting ? "is-loading" : ""}`} onSubmit={handleSubmit}>
       <div className="crop-form-header">
-        <h2>🌱 Crop Recommendation</h2>
-        <p>Fill in your farm conditions to get a focused export-ready suggestion.</p>
+        <h2>Crop Recommendation Form</h2>
+        <p>Complete these three sections for a faster and more accurate recommendation.</p>
         <div className="crop-form-badges">
-          <span>AI Assisted</span>
-          <span>Fast Result</span>
-          <span>Export Focused</span>
+          <span>1. Soil & Climate</span>
+          <span>2. Farm Details</span>
+          <span>3. Market Window</span>
         </div>
       </div>
 
-      <div className="crop-input-section-title section-soil">Soil / Climate</div>
+      <section className="crop-form-section">
+        <div className="crop-input-section-title section-soil">
+          <span className="section-step">Step 1</span>
+          <span>Soil / Climate</span>
+        </div>
+        <div className="crop-input-grid simple-grid">
+          <label className="simple-field">
+            <span className="simple-label">Nitrogen (N) <em>*</em></span>
+            <input
+              type="number"
+              min="0"
+              inputMode="numeric"
+              placeholder="Example: 90"
+              value={nitrogen}
+              onChange={(e) => setNitrogen(e.target.value)}
+              required
+            />
+            <small className="simple-help">Soil nitrogen value</small>
+          </label>
 
-      <div className="crop-input-grid">
-        <label className="crop-field-card">
-          <div className="field-head">
-            <span className="field-icon">🧪</span>
-            <div className="field-title-wrap">
-              <span className="field-label">Nitrogen (N)</span>
-              <small>Soil nutrient value</small>
-            </div>
-          </div>
-          <input
-            type="number"
-            min="0"
-            placeholder="e.g. 90"
-            value={nitrogen}
-            onChange={(e) => setNitrogen(e.target.value)}
-            required
-          />
-        </label>
+          <label className="simple-field">
+            <span className="simple-label">Phosphorus (P) <em>*</em></span>
+            <input
+              type="number"
+              min="0"
+              inputMode="numeric"
+              placeholder="Example: 40"
+              value={phosphorus}
+              onChange={(e) => setPhosphorus(e.target.value)}
+              required
+            />
+            <small className="simple-help">Soil phosphorus value</small>
+          </label>
 
-        <label className="crop-field-card">
-          <div className="field-head">
-            <span className="field-icon">🧪</span>
-            <div className="field-title-wrap">
-              <span className="field-label">Phosphorus (P)</span>
-              <small>Soil nutrient value</small>
-            </div>
-          </div>
-          <input
-            type="number"
-            min="0"
-            placeholder="e.g. 40"
-            value={phosphorus}
-            onChange={(e) => setPhosphorus(e.target.value)}
-            required
-          />
-        </label>
+          <label className="simple-field">
+            <span className="simple-label">Potassium (K) <em>*</em></span>
+            <input
+              type="number"
+              min="0"
+              inputMode="numeric"
+              placeholder="Example: 45"
+              value={potassium}
+              onChange={(e) => setPotassium(e.target.value)}
+              required
+            />
+            <small className="simple-help">Soil potassium value</small>
+          </label>
 
-        <label className="crop-field-card">
-          <div className="field-head">
-            <span className="field-icon">🧪</span>
-            <div className="field-title-wrap">
-              <span className="field-label">Potassium (K)</span>
-              <small>Soil nutrient value</small>
-            </div>
-          </div>
-          <input
-            type="number"
-            min="0"
-            placeholder="e.g. 45"
-            value={potassium}
-            onChange={(e) => setPotassium(e.target.value)}
-            required
-          />
-        </label>
+          <label className="simple-field field-wide">
+            <span className="simple-label">Rainfall (mm) <em>*</em></span>
+            <input
+              type="number"
+              min="0"
+              inputMode="numeric"
+              placeholder="Example: 850"
+              value={rainfall}
+              onChange={(e) => setRainfall(e.target.value)}
+              required
+            />
+            <small className="simple-help">Average seasonal rainfall in your area</small>
+          </label>
+        </div>
+      </section>
 
-        <label className="crop-field-card field-wide">
-          <div className="field-head">
-            <span className="field-icon">🌧️</span>
-            <div className="field-title-wrap">
-              <span className="field-label">Rainfall (mm)</span>
-              <small>Average seasonal rain</small>
-            </div>
-          </div>
-          <input
-            type="number"
-            min="0"
-            placeholder="e.g. 850"
-            value={rainfall}
-            onChange={(e) => setRainfall(e.target.value)}
-            required
-          />
-        </label>
-      </div>
+      <section className="crop-form-section">
+        <div className="crop-input-section-title section-farm">
+          <span className="section-step">Step 2</span>
+          <span>Farm Info</span>
+        </div>
+        <div className="crop-input-grid simple-grid">
+          <label className="simple-field field-wide">
+            <span className="simple-label">State <em>*</em></span>
+            <select value={stateName} onChange={(e) => setStateName(e.target.value)} required>
+              <option value="">Select your state</option>
+              <option>Punjab</option>
+              <option>Haryana</option>
+              <option>Uttar Pradesh</option>
+              <option>Maharashtra</option>
+              <option>Karnataka</option>
+              <option>Tamil Nadu</option>
+            </select>
+            <small className="simple-help">Your farm location</small>
+          </label>
 
-      <div className="crop-input-section-title section-farm">Farm Info</div>
+          <label className="simple-field">
+            <span className="simple-label">Season <em>*</em></span>
+            <select value={season} onChange={(e) => setSeason(e.target.value)} required>
+              <option value="">Select season</option>
+              <option>Kharif</option>
+              <option>Rabi</option>
+              <option>Zaid</option>
+            </select>
+            <small className="simple-help">Crop cycle period</small>
+          </label>
 
-      <div className="crop-input-grid">
-        <label className="crop-field-card field-wide">
-          <div className="field-head">
-            <span className="field-icon">🗺️</span>
-            <div className="field-title-wrap">
-              <span className="field-label">State</span>
-              <small>Select your state</small>
-            </div>
-          </div>
-          <select value={stateName} onChange={(e) => setStateName(e.target.value)} required>
-            <option value="">Select State</option>
-            <option>Punjab</option>
-            <option>Haryana</option>
-            <option>Uttar Pradesh</option>
-            <option>Maharashtra</option>
-            <option>Karnataka</option>
-            <option>Tamil Nadu</option>
-          </select>
-        </label>
+          <label className="simple-field">
+            <span className="simple-label">Area of Land (acres) <em>*</em></span>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              inputMode="decimal"
+              placeholder="Example: 2.5"
+              value={areaOfLand}
+              onChange={(e) => setAreaOfLand(e.target.value)}
+              required
+            />
+            <small className="simple-help">Total cultivable area</small>
+          </label>
+        </div>
+      </section>
 
-        <label className="crop-field-card">
-          <div className="field-head">
-            <span className="field-icon">🗓️</span>
-            <div className="field-title-wrap">
-              <span className="field-label">Season</span>
-              <small>Select cultivation cycle</small>
-            </div>
-          </div>
-          <select value={season} onChange={(e) => setSeason(e.target.value)} required>
-            <option value="">Select Season</option>
-            <option>Kharif</option>
-            <option>Rabi</option>
-            <option>Zaid</option>
-          </select>
-        </label>
+      <section className="crop-form-section">
+        <div className="crop-input-section-title section-market">
+          <span className="section-step">Step 3</span>
+          <span>Market Info</span>
+        </div>
+        <div className="crop-input-grid simple-grid">
+          <label className="simple-field">
+            <span className="simple-label">District <em>*</em></span>
+            <input
+              type="text"
+              placeholder="Example: Ludhiana"
+              value={district}
+              onChange={(e) => setDistrict(e.target.value)}
+              required
+            />
+            <small className="simple-help">District-level market zone</small>
+          </label>
 
-        <label className="crop-field-card">
-          <div className="field-head">
-            <span className="field-icon">📐</span>
-            <div className="field-title-wrap">
-              <span className="field-label">Area of Land (acres)</span>
-              <small>Total cultivable area</small>
-            </div>
-          </div>
-          <input
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="e.g. 2.5"
-            value={areaOfLand}
-            onChange={(e) => setAreaOfLand(e.target.value)}
-            required
-          />
-        </label>
-      </div>
+          <label className="simple-field">
+            <span className="simple-label">Market <em>*</em></span>
+            <input
+              type="text"
+              placeholder="Example: Khanna Mandi"
+              value={market}
+              onChange={(e) => setMarket(e.target.value)}
+              required
+            />
+            <small className="simple-help">APMC / local market name</small>
+          </label>
 
-      <div className="crop-input-section-title section-market">Market Info</div>
-
-      <div className="crop-input-grid">
-        <label className="crop-field-card">
-          <div className="field-head">
-            <span className="field-icon">🏙️</span>
-            <div className="field-title-wrap">
-              <span className="field-label">District</span>
-              <small>District-level market zone</small>
-            </div>
-          </div>
-          <input
-            type="text"
-            placeholder="e.g. Ludhiana"
-            value={district}
-            onChange={(e) => setDistrict(e.target.value)}
-            required
-          />
-        </label>
-
-        <label className="crop-field-card">
-          <div className="field-head">
-            <span className="field-icon">🏪</span>
-            <div className="field-title-wrap">
-              <span className="field-label">Market</span>
-              <small>APMC / local market</small>
-            </div>
-          </div>
-          <input
-            type="text"
-            placeholder="e.g. Khanna Mandi"
-            value={market}
-            onChange={(e) => setMarket(e.target.value)}
-            required
-          />
-        </label>
-
-        <label className="crop-field-card field-wide">
-          <div className="field-head">
-            <span className="field-icon">📅</span>
-            <div className="field-title-wrap">
-              <span className="field-label">Arrival Date</span>
-              <small>Expected produce arrival</small>
-            </div>
-          </div>
-          <input
-            type="date"
-            value={arrivalDate}
-            onChange={(e) => setArrivalDate(e.target.value)}
-            required
-          />
-        </label>
-      </div>
+          <label className="simple-field field-wide">
+            <span className="simple-label">Arrival Date <em>*</em></span>
+            <input
+              type="date"
+              value={arrivalDate}
+              onChange={(e) => setArrivalDate(e.target.value)}
+              required
+            />
+            <small className="simple-help">Expected produce arrival date</small>
+          </label>
+        </div>
+      </section>
 
       <div className="crop-form-actions">
-        <p className="crop-form-note">Tip: Keep N/P/K and rainfall values realistic for better recommendations.</p>
+        <p className="crop-form-note">Tip: Fill all required fields marked with * for better recommendations.</p>
         <div className="crop-action-buttons">
           <button type="submit" className="crop-submit-btn" disabled={isPredicting}>
-            {isPredicting ? "Analyzing Conditions..." : "🎯 Generate Prediction"}
+            {isPredicting ? "Analyzing Conditions..." : "Generate Recommendation"}
           </button>
           <button type="button" className="crop-reset-btn" onClick={handleReset} disabled={isPredicting}>
             Reset Form

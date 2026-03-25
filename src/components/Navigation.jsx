@@ -11,6 +11,7 @@ function Navigation() {
           <li><NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} end>Home</NavLink></li>
           <li><NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>About</NavLink></li>
           <li><NavLink to="/faq" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>FAQ</NavLink></li>
+          <li><NavLink to="/special-crops" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Special Crops</NavLink></li>
           <li><NavLink to="/howto" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>How to Use</NavLink></li>
           <li><NavLink to="/contact" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Contact</NavLink></li>
         </ul>

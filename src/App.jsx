@@ -1,9 +1,9 @@
-// ...existing code...
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import CropRecommendation from "./pages/CropRecommendation";
+import SpecialCropsRecommendation from "./pages/SpecialCropsRecommendation";
 import FAQPage from "./pages/FAQPage";
 import Contact from "./pages/Contact";
 import HowToUse from "./pages/HowToUse";
@@ -20,10 +20,10 @@ function App() {
         <Route path="/howto" element={<HowToUse />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/recommend" element={<CropRecommendation />} />
+        <Route path="/special-crops" element={<SpecialCropsRecommendation />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-// ...existing code...
