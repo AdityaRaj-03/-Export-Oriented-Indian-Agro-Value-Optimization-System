@@ -82,11 +82,16 @@ function HowToUse() {
         
         <div className="howto-hero-main">
           <div className="howto-hero-content">
-            <div className="howto-badge-modern">
+            <a
+              href="#steps-guide"
+              className="howto-badge-modern"
+              aria-label="Go to step-by-step guide"
+              title="Steps to use the crop recommendation website"
+            >
               <span className="badge-glow"></span>
               <span className="badge-icon">📖</span>
               <span className="badge-text">User Guide</span>
-            </div>
+            </a>
             
             <h1>Learn How to <span className="highlight">Get Started</span></h1>
             <p>Follow our simple 5-step process to receive personalized crop recommendations tailored to your farming conditions.</p>
@@ -237,7 +242,7 @@ function HowToUse() {
         </section>
 
         {/* Steps */}
-        <section className="howto-section">
+        <section id="steps-guide" className="howto-section">
           <div className="section-header">
             <span className="section-icon">🚀</span>
             <h2>Step-by-step Guide</h2>
