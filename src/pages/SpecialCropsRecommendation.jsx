@@ -1,24 +1,29 @@
 import { useState } from "react";
+import { getAllStates, getDistricts } from "india-state-district";
 import "../style/Home.css";
 import { recommendSpecialCrops } from "../data/specialCropLogic";
 
+const allIndiaStates = getAllStates();
+
 const initialForm = {
-  nitrogen: "",
-  phosphorus: "",
-  potassium: "",
-  rainfall: "",
+  N: "",
+  Soil_pH: "",
+  Temperature: "",
+  Rainfall: "",
   state: "",
-  season: "",
-  areaOfLand: "",
-  profitPriority: "High",
-  processingCapability: "Raw",
-  timeToHarvest: "Medium"
+  district: ""
 };
 
 function SpecialCropsRecommendation() {
   const [formData, setFormData] = useState(initialForm);
+  const [stateCode, setStateCode] = useState("");
+  const [districtChoice, setDistrictChoice] = useState("");
+  const [customDistrict, setCustomDistrict] = useState("");
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const selectedStateName = allIndiaStates.find((state) => state.code === stateCode)?.name || "";
+  const districtOptions = stateCode ? getDistricts(stateCode) : [];
 
   const averageMargin = result?.allRecommendations?.length
     ? Math.round(
@@ -61,14 +66,23 @@ function SpecialCropsRecommendation() {
     e.preventDefault();
     setIsLoading(true);
 
+    const submitPayload = {
+      ...formData,
+      state: selectedStateName,
+      district: districtChoice === "__other__" ? customDistrict.trim() : districtChoice
+    };
+
     await new Promise((resolve) => setTimeout(resolve, 500));
-    const data = recommendSpecialCrops(formData);
+    const data = recommendSpecialCrops(submitPayload);
     setResult(data);
     setIsLoading(false);
   }
 
   function handleReset() {
     setFormData(initialForm);
+    setStateCode("");
+    setDistrictChoice("");
+    setCustomDistrict("");
     setResult(null);
   }
 
@@ -129,8 +143,7 @@ function SpecialCropsRecommendation() {
               <p className="special-form-tagline">Designed for farmers who want stronger margins, not generic suggestions.</p>
               <div className="special-form-progress">
                 <span>Step 1 Soil and Climate</span>
-                <span>Step 2 Farm Information</span>
-                <span>Step 3 Preferences</span>
+                <span>Step 2 Location</span>
               </div>
               <div className="special-form-highlights">
                 <span>Guided form</span>
@@ -139,8 +152,8 @@ function SpecialCropsRecommendation() {
               </div>
               <div className="special-quick-check">
                 <span>Use latest soil test values</span>
-                <span>Pick true harvest timeline</span>
-                <span>Choose realistic processing mode</span>
+                <span>Select your exact location</span>
+                <span>Use district fallback if needed</span>
               </div>
             </div>
 
@@ -153,50 +166,53 @@ function SpecialCropsRecommendation() {
                 <label className="special-field">
                   <span className="special-label">Nitrogen (N)</span>
                   <input
-                    name="nitrogen"
+                    name="N"
                     type="number"
                     min="0"
                     placeholder="Example: 90"
-                    value={formData.nitrogen}
+                    value={formData.N}
                     onChange={onChange}
                     required
                   />
                   <small>Primary growth nutrient (typical range: 40 to 140)</small>
                 </label>
                 <label className="special-field">
-                  <span className="special-label">Phosphorus (P)</span>
+                  <span className="special-label">Soil pH</span>
                   <input
-                    name="phosphorus"
+                    name="Soil_pH"
                     type="number"
                     min="0"
-                    placeholder="Example: 45"
-                    value={formData.phosphorus}
+                    max="14"
+                    step="0.1"
+                    placeholder="Example: 6.5"
+                    value={formData.Soil_pH}
                     onChange={onChange}
                     required
                   />
-                  <small>Root development support (typical range: 20 to 80)</small>
+                  <small>Soil pH balance for crop suitability</small>
                 </label>
                 <label className="special-field">
-                  <span className="special-label">Potassium (K)</span>
+                  <span className="special-label">Temperature (°C)</span>
                   <input
-                    name="potassium"
+                    name="Temperature"
                     type="number"
-                    min="0"
-                    placeholder="Example: 50"
-                    value={formData.potassium}
+                    min="-10"
+                    max="60"
+                    placeholder="Example: 25"
+                    value={formData.Temperature}
                     onChange={onChange}
                     required
                   />
-                  <small>Overall crop resilience (typical range: 20 to 90)</small>
+                  <small>Average temperature in your cultivation period</small>
                 </label>
                 <label className="special-field">
                   <span className="special-label">Rainfall (mm)</span>
                   <input
-                    name="rainfall"
+                    name="Rainfall"
                     type="number"
                     min="0"
-                    placeholder="Example: 850"
-                    value={formData.rainfall}
+                    placeholder="Example: 1000"
+                    value={formData.Rainfall}
                     onChange={onChange}
                     required
                   />
@@ -208,90 +224,66 @@ function SpecialCropsRecommendation() {
             <div className="special-section special-section-farm">
               <div className="special-section-title">
                 <span className="step-pill">Step 2</span>
-                <span className="step-title">Farm Information</span>
+                <span className="step-title">Location</span>
               </div>
               <div className="special-grid">
                 <label className="special-field">
                   <span className="special-label">State</span>
-                  <select name="state" value={formData.state} onChange={onChange} required>
-                    <option value="">Select state</option>
-                    <option>Punjab</option>
-                    <option>Haryana</option>
-                    <option>Uttar Pradesh</option>
-                    <option>Maharashtra</option>
-                    <option>Karnataka</option>
-                    <option>Tamil Nadu</option>
-                    <option>Gujarat</option>
-                    <option>Rajasthan</option>
-                    <option>Jammu & Kashmir</option>
-                    <option>Himachal Pradesh</option>
-                  </select>
-                  <small>Primary cultivation location (example: Maharashtra)</small>
-                </label>
-                <label className="special-field">
-                  <span className="special-label">Season</span>
-                  <select name="season" value={formData.season} onChange={onChange} required>
-                    <option value="">Select season</option>
-                    <option>Kharif</option>
-                    <option>Rabi</option>
-                    <option>Zaid</option>
-                  </select>
-                  <small>Expected planting cycle (example: Kharif)</small>
-                </label>
-                <label className="special-field">
-                  <span className="special-label">Area of Land (acres)</span>
-                  <input
-                    name="areaOfLand"
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    placeholder="Example: 2.5"
-                    value={formData.areaOfLand}
-                    onChange={onChange}
+                  <select
+                    value={stateCode}
+                    onChange={(e) => {
+                      setStateCode(e.target.value);
+                      setDistrictChoice("");
+                      setCustomDistrict("");
+                    }}
                     required
-                  />
-                  <small>Total farm area available (example: 1 to 5 acres)</small>
+                  >
+                    <option value="">Select state</option>
+                    {allIndiaStates.map((stateOption) => (
+                      <option key={stateOption.code} value={stateOption.code}>
+                        {stateOption.name}
+                      </option>
+                    ))}
+                  </select>
+                  <small>State where your farm is located</small>
                 </label>
-              </div>
-            </div>
+                <label className="special-field">
+                  <span className="special-label">District</span>
+                  <select
+                    value={districtChoice}
+                    onChange={(e) => setDistrictChoice(e.target.value)}
+                    required
+                    disabled={!stateCode}
+                  >
+                    <option value="">{stateCode ? "Select district" : "Select state first"}</option>
+                    {districtOptions.map((districtName) => (
+                      <option key={districtName} value={districtName}>
+                        {districtName}
+                      </option>
+                    ))}
+                    <option value="__other__">Other (Enter manually)</option>
+                  </select>
+                  <small>District options depend on selected state</small>
+                </label>
 
-            <div className="special-section special-section-preferences">
-              <div className="special-section-title">
-                <span className="step-pill">Step 3</span>
-                <span className="step-title">Special Crop Preferences</span>
-              </div>
-              <div className="special-grid">
-                <label className="special-field">
-                  <span className="special-label">Profit Priority</span>
-                  <select name="profitPriority" value={formData.profitPriority} onChange={onChange}>
-                    <option>Medium</option>
-                    <option>High</option>
-                    <option>Very High</option>
-                  </select>
-                  <small>Filters by profit margin threshold (start with High)</small>
-                </label>
-                <label className="special-field">
-                  <span className="special-label">Processing Capability</span>
-                  <select name="processingCapability" value={formData.processingCapability} onChange={onChange}>
-                    <option>Raw</option>
-                    <option>Processed</option>
-                  </select>
-                  <small>Prioritize raw vs processed crops (choose Processed if available)</small>
-                </label>
-                <label className="special-field">
-                  <span className="special-label">Time to Harvest</span>
-                  <select name="timeToHarvest" value={formData.timeToHarvest} onChange={onChange}>
-                    <option>Short</option>
-                    <option>Medium</option>
-                    <option>Long</option>
-                  </select>
-                  <small>Crop maturity timeline preference (example: Medium)</small>
-                </label>
+                {districtChoice === "__other__" && (
+                  <label className="special-field">
+                    <span className="special-label">Enter District Name</span>
+                    <input
+                      type="text"
+                      placeholder="Type your district"
+                      value={customDistrict}
+                      onChange={(e) => setCustomDistrict(e.target.value)}
+                      required
+                    />
+                    <small>Use this when your district is not listed</small>
+                  </label>
+                )}
               </div>
             </div>
 
             <div className="special-actions">
-              <p className="special-form-note">Tip: Keep values realistic to get more accurate profit-based ranking.</p>
+              <p className="special-form-note">Tip: Keep values realistic to get stronger suitability ranking.</p>
               <button type="submit" disabled={isLoading}>
                 {isLoading ? "Analyzing..." : "Generate Recommendations"}
               </button>
@@ -345,8 +337,8 @@ function SpecialCropsRecommendation() {
 
                 <div className="special-summary">
                   <span>Matched crops: {result.summary.matchedCount}</span>
-                  <span>Priority: {result.summary.priority}</span>
-                  <span>Mode: {result.summary.mode}</span>
+                  <span>State: {selectedStateName || "-"}</span>
+                  <span>District: {districtChoice === "__other__" ? customDistrict : districtChoice || "-"}</span>
                 </div>
 
                 <div className="special-kpi-grid">
@@ -388,7 +380,7 @@ function SpecialCropsRecommendation() {
                 {result.topRecommendations.length === 0 && (
                   <div className="special-no-results">
                     <h4>No crops matched your current filters.</h4>
-                    <p>Try lowering profit priority or choosing a different harvest duration.</p>
+                    <p>Try adjusting soil and climate values and regenerate recommendations.</p>
                   </div>
                 )}
 
@@ -422,8 +414,8 @@ function SpecialCropsRecommendation() {
                     <h4>Why this ranking is strong</h4>
                     <ul>
                       <li>
-                        {bestCrop.cropName} has the best total score from your selected season,
-                        state, and harvest preference.
+                        {bestCrop.cropName} has the best total score from your selected climate,
+                        soil, and location profile.
                       </li>
                       <li>
                         Export advantage is Rs{" "}
@@ -431,8 +423,8 @@ function SpecialCropsRecommendation() {
                         over domestic price.
                       </li>
                       <li>
-                        Processing mode {result.summary.mode} is reflected in ranking and margin
-                        calculation.
+                        Farm fit score reflects rainfall, nitrogen strength, pH balance, and
+                        temperature suitability.
                       </li>
                     </ul>
                   </section>

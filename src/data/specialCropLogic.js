@@ -78,12 +78,6 @@ const SPECIAL_CROPS = [
   }
 ];
 
-function getPriorityThreshold(priority) {
-  if (priority === "Very High") return 80;
-  if (priority === "High") return 60;
-  return 35;
-}
-
 function toProfitLevel(margin) {
   if (margin >= 90) return "High";
   if (margin >= 55) return "Medium";
@@ -91,13 +85,17 @@ function toProfitLevel(margin) {
 }
 
 function scoreCrop(crop, input) {
-  const nutrientScore = Number(input.nitrogen) + Number(input.phosphorus) + Number(input.potassium);
-  const rainfall = Number(input.rainfall);
+  const nitrogen = Number(input.N ?? input.nitrogen ?? 0);
+  const soilPh = Number(input.Soil_pH ?? input.soilPh ?? 7);
+  const temperature = Number(input.Temperature ?? input.temperature ?? 25);
+  const rainfall = Number(input.Rainfall ?? input.rainfall ?? 0);
+  const district = input.district || "";
+  const fertilityIndex = nitrogen + Math.max(0, 84 - Math.abs(soilPh - 6.5) * 20);
 
   let score = 0;
 
   if (crop.suitableRegions.includes(input.state)) score += 28;
-  if (crop.seasons.includes(input.season)) score += 18;
+  if (district) score += 8;
 
   if (rainfall >= crop.rainfallRange[0] && rainfall <= crop.rainfallRange[1]) {
     score += 22;
@@ -109,33 +107,34 @@ function scoreCrop(crop, input) {
     score += Math.max(0, 22 - rainfallGap / 30);
   }
 
-  if (nutrientScore >= crop.nutrientBand[0] && nutrientScore <= crop.nutrientBand[1]) {
+  if (fertilityIndex >= crop.nutrientBand[0] && fertilityIndex <= crop.nutrientBand[1]) {
     score += 20;
   } else {
     const nutrientGap = Math.min(
-      Math.abs(nutrientScore - crop.nutrientBand[0]),
-      Math.abs(nutrientScore - crop.nutrientBand[1])
+      Math.abs(fertilityIndex - crop.nutrientBand[0]),
+      Math.abs(fertilityIndex - crop.nutrientBand[1])
     );
     score += Math.max(0, 20 - nutrientGap / 8);
   }
 
-  if (input.timeToHarvest === crop.harvestTime) score += 12;
-
-  if (input.processingCapability === "Processed" && crop.processingFriendly) score += 10;
-  if (input.processingCapability === "Raw" && !crop.processingFriendly) score += 5;
+  // Higher score when pH is near neutral and temperature is near crop-friendly band.
+  score += Math.max(0, 12 - Math.abs(soilPh - 6.5) * 3);
+  score += Math.max(0, 10 - Math.abs(temperature - 27) * 0.8);
 
   return Math.round(score);
 }
 
 export function recommendSpecialCrops(input) {
-  const priorityThreshold = getPriorityThreshold(input.profitPriority);
+  const priorityThreshold = 35;
+  const rainfall = Number(input.Rainfall ?? input.rainfall ?? 0);
+  const temperature = Number(input.Temperature ?? input.temperature ?? 25);
 
   const normalized = SPECIAL_CROPS.map((crop) => {
     const baseMargin = ((crop.exportPrice - crop.indiaPrice) / crop.indiaPrice) * 100;
-    const processingBonus = input.processingCapability === "Processed" && crop.processingFriendly ? 8 : 0;
-    const areaBonus = Math.min(10, Number(input.areaOfLand || 0) * 1.8);
+    const rainfallBonus = rainfall >= crop.rainfallRange[0] && rainfall <= crop.rainfallRange[1] ? 6 : 0;
+    const climateBonus = Math.max(0, 6 - Math.abs(temperature - 27) * 0.5);
 
-    const estimatedProfitMargin = Math.round(baseMargin + processingBonus + areaBonus);
+    const estimatedProfitMargin = Math.round(baseMargin + rainfallBonus + climateBonus);
     const suitability = scoreCrop(crop, input);
 
     return {
@@ -152,10 +151,6 @@ export function recommendSpecialCrops(input) {
     };
   })
     .filter((crop) => crop.estimatedProfitMargin >= priorityThreshold)
-    .filter((crop) => {
-      if (input.timeToHarvest) return crop.harvestTime === input.timeToHarvest;
-      return true;
-    })
     .sort((a, b) => b.totalScore - a.totalScore);
 
   const recommendations = normalized.slice(0, 6);
@@ -165,8 +160,8 @@ export function recommendSpecialCrops(input) {
     allRecommendations: recommendations,
     summary: {
       matchedCount: recommendations.length,
-      priority: input.profitPriority,
-      mode: input.processingCapability
+      priority: "Standard",
+      mode: "Auto"
     }
   };
 }
