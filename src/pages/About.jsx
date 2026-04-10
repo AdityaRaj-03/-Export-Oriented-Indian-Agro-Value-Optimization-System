@@ -146,7 +146,7 @@ function About() {
   const team = [
     { name: "Divyanshu Kashyap", role: "Backend Developer", icon: "⚙️" },
     { name: "Bavigadda Meghana", role: "Research & ML", icon: "🧠" },
-    { name: "Aditya Raj", role: "Frontend Developer", icon: "🎨" },
+    { name: "Aditya Raj", role: "Frontend Developer", icon: "🎨", image: "/PFP.jpg" },
   ];
 
   const [hoveredFeature, setHoveredFeature] = useState(null);
@@ -404,7 +404,7 @@ function About() {
           {team.map((m, i) => (
             <div key={i} className="team-card-new">
               <div className="team-photo-placeholder">
-                <span>{m.icon}</span>
+                {m.image ? <img src={m.image} alt={`${m.name} profile`} /> : <span>{m.icon}</span>}
               </div>
               <h3 className="team-name">{m.name}</h3>
               <p className="team-role">{m.role}</p>
