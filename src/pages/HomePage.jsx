@@ -1,13 +1,12 @@
-// ...existing code...
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FiActivity,
   FiArrowRight,
   FiBarChart2,
   FiCheckCircle,
-  FiClock,
-  FiCloudRain,
+  FiChevronLeft,
+  FiChevronRight,
   FiGlobe,
   FiMapPin,
   FiShield,
@@ -19,6 +18,8 @@ import "../style/Home.css";
 import Footer from "../components/Footer";
 
 function HomePage() {
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
   useEffect(() => {
     const revealItems = document.querySelectorAll(".landing-reveal");
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -64,27 +65,6 @@ function HomePage() {
       text: "From farm input to actionable direction in seconds, with risk-aware signals built in."
     }
   ];
-
-  const trustPoints = [
-    { icon: <FiCheckCircle />, text: "Built for Indian conditions" },
-    { icon: <FiUsers />, text: "Designed for exporters and advisors" },
-    { icon: <FiClock />, text: "Decision-ready output in under a minute" }
-  ];
-
-  const quickKpis = [
-    { icon: <FiBarChart2 />, label: "Prediction Confidence", value: "92%" },
-    { icon: <FiTrendingUp />, label: "Export Opportunity Signals", value: "45+" },
-    { icon: <FiCloudRain />, label: "Weather & Soil Inputs", value: "12" },
-  ];
-
-  const panelSignals = [
-    { icon: <FiTrendingUp />, label: "Export Demand", value: "High", tone: "is-positive" },
-    { icon: <FiMapPin />, label: "District Fit", value: "Strong", tone: "is-sky" },
-    { icon: <FiShield />, label: "Risk Outlook", value: "Low", tone: "is-calm" },
-    { icon: <FiCloudRain />, label: "Weather Match", value: "Aligned", tone: "is-neutral" },
-  ];
-
-  const panelTrendBars = [58, 64, 62, 71, 76, 84, 79, 88];
 
   const proofStats = [
     { icon: <FiUsers />, value: "1.2k+", text: "Farmers and advisors already using it" },
@@ -182,117 +162,134 @@ function HomePage() {
     }
   ];
 
+  const spotlightFeatures = [
+    {
+      icon: <FiCheckCircle />,
+      title: "Best Match",
+      value: "92%",
+      text: "Highlights the strongest crop fit from your farm profile."
+    },
+    {
+      icon: <FiTrendingUp />,
+      title: "Export Pulse",
+      value: "Hot",
+      text: "Shows which crop groups are gaining market traction."
+    },
+    {
+      icon: <FiShield />,
+      title: "Risk Buffer",
+      value: "Low",
+      text: "Flags safer planting choices before you commit a season."
+    }
+  ];
+
+  const featuredCrops = [
+    {
+      id: 1,
+      name: "Basmati Rice",
+      emoji: "🌾",
+      exportDemand: "Very High",
+      demandTrend: "+24%",
+      season: "Jun - Oct",
+      climate: "Moderate temp, 150-250cm rainfall",
+      price: "₹50-65/kg",
+      region: "Punjab, Haryana",
+      color: "#FFD67D"
+    },
+    {
+      id: 2,
+      name: "Saffron",
+      emoji: "🟡",
+      exportDemand: "Premium",
+      demandTrend: "+18%",
+      season: "Oct - Jan",
+      climate: "Cool, 500-900mm rainfall",
+      price: "₹15,000-25,000/kg",
+      region: "Kashmir",
+      color: "#FF6B6B"
+    },
+    {
+      id: 3,
+      name: "Cardamom",
+      emoji: "🌿",
+      exportDemand: "High",
+      demandTrend: "+15%",
+      season: "Aug - Dec",
+      climate: "Humid tropical, high rainfall",
+      price: "₹2,500-3,500/kg",
+      region: "Kerala, Karnataka",
+      color: "#1D9A6C"
+    },
+    {
+      id: 4,
+      name: "Spices Mix",
+      emoji: "🌶️",
+      exportDemand: "High",
+      demandTrend: "+12%",
+      season: "Year-round",
+      climate: "Varied, adaptable",
+      price: "₹300-800/kg",
+      region: "Pan-India",
+      color: "#F59E0B"
+    },
+    {
+      id: 5,
+      name: "Turmeric",
+      emoji: "🟡",
+      exportDemand: "Very High",
+      demandTrend: "+21%",
+      season: "Sep - Dec",
+      climate: "Warm, 150-225cm rainfall",
+      price: "₹8,000-12,000/kg",
+      region: "Telangana, Maharashtra",
+      color: "#FFA500"
+    }
+  ];
+
+  const handleCarouselPrev = () => {
+    setCarouselIndex((prev) => (prev === 0 ? featuredCrops.length - 1 : prev - 1));
+  };
+
+  const handleCarouselNext = () => {
+    setCarouselIndex((prev) => (prev === featuredCrops.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <div className="page landing-page">
-      <section className="landing-hero">
-        <div className="landing-hero-grid-pattern"></div>
-        <div className="landing-hero-illustration" aria-hidden="true">
-          <div className="hero-orb hero-orb-a"></div>
-          <div className="hero-orb hero-orb-b"></div>
-          <div className="hero-mini-card hero-mini-card-map">
-            <FiMapPin />
-            <span>District Match</span>
-          </div>
-          <div className="hero-mini-card hero-mini-card-export">
-            <FiTrendingUp />
-            <span>Export Signal</span>
-          </div>
-          <div className="hero-mini-card hero-mini-card-risk">
-            <FiShield />
-            <span>Risk Alert</span>
-          </div>
+      <section className="landing-hero landing-reference-hero">
+        <div className="landing-hero-scene" aria-hidden="true">
+          <div className="scene-row row-1"></div>
+          <div className="scene-row row-2"></div>
+          <div className="scene-row row-3"></div>
+          <div className="scene-row row-4"></div>
+          <div className="scene-row row-5"></div>
+          <div className="scene-row row-6"></div>
+          <div className="scene-hills"></div>
+          <div className="scene-leaf-overlay"></div>
         </div>
-        <div className="landing-hero-shell">
-          <div className="landing-hero-content">
-            <span className="landing-badge">Built for Indian Farmers and Export Planners</span>
-            <p className="landing-hero-eyebrow">From local farm inputs to higher-value crop decisions</p>
-            <h1 className="landing-hero-title">
-              Plan the Right Crop.
-              <span className="landing-title-accent"> Grow with Export Confidence.</span>
-            </h1>
-            <p className="landing-hero-subcopy">
-              Get a data-backed crop recommendation in under a minute using your region, soil, and weather
-              conditions so your next season starts with clarity.
+
+        <div className="landing-reference-shell">
+          <div className="landing-reference-content">
+            <p className="landing-reference-eyebrow">AI Crop Intelligence for Export-Oriented Farming</p>
+            <h1>Choose the Right Crop with Export Confidence</h1>
+            <p>
+              Get smart crop recommendations using your region, season, soil, and weather
+              data so every planting decision is aligned with market opportunity.
             </p>
 
-            <div className="landing-hero-actions">
-              <Link to="/recommend" className="landing-cta-primary">
-                Get My Crop Recommendation <FiArrowRight className="cta-icon" aria-hidden="true" />
+            <div className="landing-reference-points" aria-label="Recommendation strengths">
+              <span>Soil & season aware</span>
+              <span>Export signal guided</span>
+              <span>Risk-aware planning</span>
+            </div>
+            <div className="landing-reference-actions">
+              <Link to="/recommend" className="reference-cta-primary">
+                Get Recommendation <FiArrowRight className="cta-icon" aria-hidden="true" />
               </Link>
-              <Link to="/special-crops" className="landing-cta-secondary">
-                See Special Crop Opportunities
-              </Link>
+              <Link to="/special-crops" className="reference-cta-secondary">Explore Special Crops</Link>
             </div>
 
-            <div className="landing-hero-kpis">
-              {quickKpis.map((item) => (
-                <div key={item.label} className="landing-kpi-card">
-                  <span className="landing-kpi-icon">{item.icon}</span>
-                  <strong>{item.value}</strong>
-                  <small>{item.label}</small>
-                </div>
-              ))}
-            </div>
-
-            <div className="landing-hero-trustbar">
-              {trustPoints.map((point) => (
-                <span key={point.text}>
-                  <i className="trust-icon">{point.icon}</i>
-                  <i className="trust-dot"></i>
-                  {point.text}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="landing-hero-panel landing-dashboard-panel">
-            <div className="landing-panel-head">
-              <span className="dot"></span>
-              <strong>Instant Recommendation Preview</strong>
-            </div>
-
-            <div className="dashboard-top-row">
-              <div className="dashboard-crop-info">
-                <span className="dashboard-crop-chip">Recommended Crop</span>
-                <h3>Rice</h3>
-                <p>High export momentum for your district and season profile.</p>
-              </div>
-
-              <div className="dashboard-score-wrap" aria-label="Confidence score is 91 percent">
-                <div className="dashboard-score-ring">
-                  <strong>91</strong>
-                </div>
-                <span>Confidence</span>
-              </div>
-            </div>
-
-            <div className="landing-panel-signals-grid">
-              {panelSignals.map((item) => (
-                <div key={item.label} className={`landing-signal-card ${item.tone}`}>
-                  <span className="landing-signal-icon">{item.icon}</span>
-                  <div>
-                    <small>{item.label}</small>
-                    <strong>{item.value}</strong>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="dashboard-trend-box">
-              <div className="dashboard-trend-head">
-                <span>Export Demand Trend</span>
-                <strong>+12%</strong>
-              </div>
-              <div className="dashboard-sparkline" aria-label="7-day export demand trend">
-                {panelTrendBars.map((height, idx) => (
-                  <span key={idx} style={{ height: `${height}%` }}></span>
-                ))}
-              </div>
-            </div>
-
-            <Link to="/recommend" className="dashboard-panel-cta">
-              Open Full Recommendation <FiArrowRight className="cta-icon" aria-hidden="true" />
-            </Link>
+            <p className="landing-reference-note">No signup required. Results in under 60 seconds.</p>
           </div>
         </div>
       </section>
@@ -305,6 +302,139 @@ function HomePage() {
             <span>{item.text}</span>
           </div>
         ))}
+      </section>
+
+      <section className="landing-section landing-spotlight landing-reveal" style={{ "--reveal-delay": "100ms" }}>
+        <div className="landing-section-head">
+          <p className="landing-section-label">Decision Snapshot</p>
+          <h2>A More Visual Way to Read Your Farm Signals</h2>
+          <p>See the core factors that shape crop selection without opening a form first.</p>
+        </div>
+        <div className="landing-spotlight-grid">
+          <div className="spotlight-main-card">
+            <div className="spotlight-main-top">
+              <span className="spotlight-badge">Live Farm View</span>
+              <span className="spotlight-status">Updated now</span>
+            </div>
+            <div className="spotlight-metric-row">
+              <div>
+                <small>Season fit</small>
+                <strong>Very Strong</strong>
+              </div>
+              <div>
+                <small>Demand trend</small>
+                <strong>Rising</strong>
+              </div>
+              <div>
+                <small>Decision speed</small>
+                <strong>Under 60 sec</strong>
+              </div>
+            </div>
+            <div className="spotlight-meter-block">
+              <div className="spotlight-meter-labels">
+                <span>Farm compatibility</span>
+                <strong>88%</strong>
+              </div>
+              <div className="spotlight-meter" aria-label="Farm compatibility 88 percent">
+                <i style={{ width: "88%" }}></i>
+              </div>
+            </div>
+            <Link to="/recommend" className="spotlight-action">
+              Start Your Crop Match <FiArrowRight />
+            </Link>
+          </div>
+
+          <div className="spotlight-side-stack">
+            {spotlightFeatures.map((item, idx) => (
+              <article key={item.title} className="spotlight-side-card" style={{ "--reveal-delay": `${120 + idx * 70}ms` }}>
+                <span className="spotlight-side-icon">{item.icon}</span>
+                <div>
+                  <div className="spotlight-side-head">
+                    <h3>{item.title}</h3>
+                    <strong>{item.value}</strong>
+                  </div>
+                  <p>{item.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="landing-featured-crops landing-reveal" style={{ "--reveal-delay": "110ms" }}>
+        <div className="landing-section-head">
+          <p className="landing-section-label">Trending Now</p>
+          <h2>Featured Export-Ready Crops</h2>
+          <p>High-demand crops with verified export momentum this season.</p>
+        </div>
+        <div className="featured-crops-container">
+          <div className="featured-crops-carousel">
+            {featuredCrops.map((crop, idx) => (
+              <div
+                key={crop.id}
+                className={`featured-crop-card ${idx === carouselIndex ? 'active' : ''}`}
+                style={{ "--crop-color": crop.color }}
+              >
+                <div className="crop-card-inner">
+                  <div className="crop-emoji">{crop.emoji}</div>
+                  <div className="crop-info">
+                    <h3>{crop.name}</h3>
+                    <p className="crop-region">{crop.region}</p>
+                  </div>
+                  <div className="crop-demand">
+                    <span className="demand-badge">{crop.exportDemand}</span>
+                    <span className="demand-trend">{crop.demandTrend}</span>
+                  </div>
+                  <div className="crop-details">
+                    <div className="detail-item">
+                      <small>Season</small>
+                      <p>{crop.season}</p>
+                    </div>
+                    <div className="detail-item">
+                      <small>Climate</small>
+                      <p>{crop.climate}</p>
+                    </div>
+                    <div className="detail-item">
+                      <small>Export Price</small>
+                      <p>{crop.price}</p>
+                    </div>
+                  </div>
+                  <Link to="/recommend" className="crop-quick-action">
+                    Get Recommendation <FiArrowRight />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="carousel-nav">
+            <button
+              className="carousel-btn prev"
+              onClick={handleCarouselPrev}
+              aria-label="Previous crop"
+            >
+              <FiChevronLeft />
+            </button>
+            <div className="carousel-indicators">
+              {featuredCrops.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`indicator ${idx === carouselIndex ? 'active' : ''}`}
+                  onClick={() => setCarouselIndex(idx)}
+                  role="button"
+                  tabIndex="0"
+                  aria-label={`Go to crop ${idx + 1}`}
+                />
+              ))}
+            </div>
+            <button
+              className="carousel-btn next"
+              onClick={handleCarouselNext}
+              aria-label="Next crop"
+            >
+              <FiChevronRight />
+            </button>
+          </div>
+        </div>
       </section>
 
       <section className="landing-section landing-reveal" style={{ "--reveal-delay": "140ms" }}>
