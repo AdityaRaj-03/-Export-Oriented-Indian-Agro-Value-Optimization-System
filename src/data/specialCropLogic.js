@@ -8,7 +8,8 @@ const SPECIAL_CROPS = [
     harvestTime: "Short",
     processingFriendly: true,
     indiaPrice: 5200,
-    exportPrice: 9100
+    exportPrice: 9100,
+    specialtyFactor: 1.1
   },
   {
     name: "Makhana",
@@ -19,7 +20,8 @@ const SPECIAL_CROPS = [
     harvestTime: "Long",
     processingFriendly: true,
     indiaPrice: 7600,
-    exportPrice: 13200
+    exportPrice: 13200,
+    specialtyFactor: 1.2
   },
   {
     name: "Psyllium Husk",
@@ -30,7 +32,8 @@ const SPECIAL_CROPS = [
     harvestTime: "Medium",
     processingFriendly: true,
     indiaPrice: 9800,
-    exportPrice: 16800
+    exportPrice: 16800,
+    specialtyFactor: 1.15
   },
   {
     name: "Saffron",
@@ -41,7 +44,8 @@ const SPECIAL_CROPS = [
     harvestTime: "Long",
     processingFriendly: false,
     indiaPrice: 122000,
-    exportPrice: 198000
+    exportPrice: 198000,
+    specialtyFactor: 1.3
   },
   {
     name: "Exotic Mushrooms",
@@ -52,7 +56,56 @@ const SPECIAL_CROPS = [
     harvestTime: "Short",
     processingFriendly: true,
     indiaPrice: 14500,
-    exportPrice: 23600
+    exportPrice: 23600,
+    specialtyFactor: 1.2
+  },
+  {
+    name: "Cardamom",
+    suitableRegions: ["Kerala", "Karnataka", "Tamil Nadu"],
+    seasons: ["Kharif"],
+    rainfallRange: [1500, 2500],
+    nutrientBand: [150, 280],
+    harvestTime: "Long",
+    processingFriendly: true,
+    indiaPrice: 18000,
+    exportPrice: 31500,
+    specialtyFactor: 1.3
+  },
+  {
+    name: "Black Pepper",
+    suitableRegions: ["Kerala", "Karnataka", "Odisha"],
+    seasons: ["Kharif", "Zaid"],
+    rainfallRange: [1500, 2800],
+    nutrientBand: [160, 290],
+    harvestTime: "Medium",
+    processingFriendly: true,
+    indiaPrice: 12000,
+    exportPrice: 22500,
+    specialtyFactor: 1.25
+  },
+  {
+    name: "Turmeric",
+    suitableRegions: ["Telangana", "Maharashtra", "Andhra Pradesh"],
+    seasons: ["Kharif"],
+    rainfallRange: [1500, 2250],
+    nutrientBand: [140, 280],
+    harvestTime: "Long",
+    processingFriendly: true,
+    indiaPrice: 6500,
+    exportPrice: 14200,
+    specialtyFactor: 1.1
+  },
+  {
+    name: "Basmati Rice",
+    suitableRegions: ["Punjab", "Haryana", "Uttar Pradesh"],
+    seasons: ["Kharif"],
+    rainfallRange: [400, 1200],
+    nutrientBand: [120, 260],
+    harvestTime: "Medium",
+    processingFriendly: true,
+    indiaPrice: 4200,
+    exportPrice: 11800,
+    specialtyFactor: 1.15
   },
   {
     name: "Millets",
@@ -63,7 +116,8 @@ const SPECIAL_CROPS = [
     harvestTime: "Medium",
     processingFriendly: false,
     indiaPrice: 3600,
-    exportPrice: 7300
+    exportPrice: 7300,
+    specialtyFactor: 0.75
   },
   {
     name: "Pomegranate",
@@ -74,7 +128,8 @@ const SPECIAL_CROPS = [
     harvestTime: "Medium",
     processingFriendly: true,
     indiaPrice: 9200,
-    exportPrice: 14900
+    exportPrice: 14900,
+    specialtyFactor: 1.15
   }
 ];
 
@@ -125,17 +180,20 @@ function scoreCrop(crop, input) {
 }
 
 export function recommendSpecialCrops(input) {
-  const priorityThreshold = 35;
+  const priorityThreshold = 30;
   const rainfall = Number(input.Rainfall ?? input.rainfall ?? 0);
   const temperature = Number(input.Temperature ?? input.temperature ?? 25);
 
   const normalized = SPECIAL_CROPS.map((crop) => {
     const baseMargin = ((crop.exportPrice - crop.indiaPrice) / crop.indiaPrice) * 100;
-    const rainfallBonus = rainfall >= crop.rainfallRange[0] && rainfall <= crop.rainfallRange[1] ? 6 : 0;
-    const climateBonus = Math.max(0, 6 - Math.abs(temperature - 27) * 0.5);
+    const rainfallBonus = rainfall >= crop.rainfallRange[0] && rainfall <= crop.rainfallRange[1] ? 8 : 0;
+    const climateBonus = Math.max(0, 8 - Math.abs(temperature - 27) * 0.5);
 
     const estimatedProfitMargin = Math.round(baseMargin + rainfallBonus + climateBonus);
-    const suitability = scoreCrop(crop, input);
+    const baseSuitability = scoreCrop(crop, input);
+    
+    // Apply specialty factor to suitability score - boosts specialty crops, penalizes commodities
+    const suitability = Math.round(baseSuitability * crop.specialtyFactor);
 
     return {
       cropName: crop.name,
@@ -147,7 +205,8 @@ export function recommendSpecialCrops(input) {
       harvestTime: crop.harvestTime,
       processingFriendly: crop.processingFriendly,
       suitabilityScore: suitability,
-      totalScore: estimatedProfitMargin * 0.65 + suitability * 0.35
+      // Prioritize farm suitability (70%) over profit margin (30%) for diverse, wise recommendations
+      totalScore: estimatedProfitMargin * 0.3 + suitability * 0.7
     };
   })
     .filter((crop) => crop.estimatedProfitMargin >= priorityThreshold)
