@@ -146,7 +146,7 @@ function About() {
   const team = [
     { name: "Divyanshu Kashyap", role: "Backend Developer", icon: "⚙️" },
     { name: "Bavigadda Meghana", role: "Research & ML", icon: "🧠" },
-    { name: "Aditya Raj", role: "Frontend Developer", icon: "🎨", image: "/PFP.jpg" },
+    { name: "Aditya Raj", role: "Frontend Developer", icon: "🎨" },
   ];
 
   const [hoveredFeature, setHoveredFeature] = useState(null);
