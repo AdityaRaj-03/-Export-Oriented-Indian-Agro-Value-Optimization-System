@@ -136,6 +136,19 @@ function Result({ result }) {
         </div>
       </div>
 
+      {result.recommendedAlternatives?.length > 0 && (
+        <div className="result-insights">
+          <h4>Other Good Crop Matches</h4>
+          <ul>
+            {result.recommendedAlternatives.map((item) => (
+              <li key={item.crop} style={{ marginBottom: "10px" }}>
+                <strong>{item.crop}</strong> - Fit {item.fitScore}% | Export to {item.exportCountry}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {/* Score Cards */}
       <div className="result-scores-section">
         <h3 className="section-title">📈 Performance Scores</h3>
